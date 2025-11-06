@@ -1,10 +1,10 @@
 ﻿using System.Text;
-using Eshop.Server.Applicazione.Interfacce;
-using Eshop.Server.Applicazione.ServiziApplicativi;
-using Eshop.Server.Infrastruttura.Auth;
-using Eshop.Server.Infrastruttura.Persistenza;
-using Eshop.Server.Infrastruttura.Persistenza.Repositories;
-using Eshop.Server.Infrastruttura.Pagamenti;
+using Eshop.Server.Application.Interfacce;
+using Eshop.Server.Application.ServiziApplicativi;
+using Eshop.Server.Infrastructure.Auth;
+using Eshop.Server.Infrastructure.Persistenza;
+using Eshop.Server.Infrastructure.Persistenza.Repositories;
+using Eshop.Server.Infrastructure.Pagamenti;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;

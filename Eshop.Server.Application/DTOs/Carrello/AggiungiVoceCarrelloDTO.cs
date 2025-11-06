@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Eshop.Server.Applicazione.DTOs.Carrello
+namespace Eshop.Server.Application.DTOs.Carrello
 {
     public class AggiungiVoceCarrelloDTO
     {

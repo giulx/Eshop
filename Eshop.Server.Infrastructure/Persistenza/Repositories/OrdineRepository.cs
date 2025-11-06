@@ -2,10 +2,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Eshop.Server.Applicazione.Interfacce;
-using Eshop.Server.Dominio.Modelli;
+using Eshop.Server.Application.Interfacce;
+using Eshop.Server.Domain.Modelli;
 
-namespace Eshop.Server.Infrastruttura.Persistenza.Repositories
+namespace Eshop.Server.Infrastructure.Persistenza.Repositories
 {
     /// <summary>
     /// Repository EF Core per l'aggregato Ordine.

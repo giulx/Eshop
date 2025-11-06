@@ -1,7 +1,7 @@
-﻿using Eshop.Server.Dominio.Modelli;
+﻿using Eshop.Server.Domain.Modelli;
 using Microsoft.EntityFrameworkCore;
 
-namespace Eshop.Server.Infrastruttura.Persistenza
+namespace Eshop.Server.Infrastructure.Persistenza
 {
     public class AppDbContext : DbContext
     {

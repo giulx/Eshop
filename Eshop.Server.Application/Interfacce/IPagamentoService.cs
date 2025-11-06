@@ -1,4 +1,4 @@
-namespace Eshop.Server.Applicazione.Interfacce
+namespace Eshop.Server.Application.Interfacce
 {
     public interface IPagamentoService
     {

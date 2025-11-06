@@ -1,10 +1,10 @@
-﻿using Eshop.Server.Applicazione.DTOs.Carrello;
-using Eshop.Server.Applicazione.Interfacce;
-using Eshop.Server.Dominio.Modelli;
-using Eshop.Server.Dominio.OggettiValore;
+﻿using Eshop.Server.Application.DTOs.Carrello;
+using Eshop.Server.Application.Interfacce;
+using Eshop.Server.Domain.Modelli;
+using Eshop.Server.Domain.OggettiValore;
 using System.Threading.Tasks;
 
-namespace Eshop.Server.Applicazione.ServiziApplicativi
+namespace Eshop.Server.Application.ServiziApplicativi
 {
     public class CarrelloService
     {

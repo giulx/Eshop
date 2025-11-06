@@ -32,9 +32,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Eshop.Server.Applicazione\Eshop.Server.Applicazione.csproj" />
-		<ProjectReference Include="..\Eshop.Server.Infrastruttura\Eshop.Server.Infrastruttura.csproj" />
-		<ProjectReference Include="..\Eshop.Server.Dominio\Eshop.Server.Dominio.csproj" />
+		<ProjectReference Include="..\Eshop.Server.Application\Eshop.Server.Application.csproj" />
+		<ProjectReference Include="..\Eshop.Server.Infrastructure\Eshop.Server.Infrastructure.csproj" />
+		<ProjectReference Include="..\Eshop.Server.Domain\Eshop.Server.Domain.csproj" />
 	</ItemGroup>
 
 </Project>

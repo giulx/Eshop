@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Eshop.Server.Applicazione.DTOs.Prodotto;
-using Eshop.Server.Applicazione.Interfacce;
-using Eshop.Server.Dominio.Modelli;
-using Eshop.Server.Dominio.OggettiValore;
+using Eshop.Server.Application.DTOs.Prodotto;
+using Eshop.Server.Application.Interfacce;
+using Eshop.Server.Domain.Modelli;
+using Eshop.Server.Domain.OggettiValore;
 
-namespace Eshop.Server.Applicazione.ServiziApplicativi
+namespace Eshop.Server.Application.ServiziApplicativi
 {
     /// <summary>
     /// Servizio applicativo per la gestione del catalogo prodotti.

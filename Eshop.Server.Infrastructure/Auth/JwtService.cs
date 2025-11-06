@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using Eshop.Server.Applicazione.Interfacce;
-using Eshop.Server.Dominio.Modelli;
+using Eshop.Server.Application.Interfacce;
+using Eshop.Server.Domain.Modelli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
-namespace Eshop.Server.Infrastruttura.Auth
+namespace Eshop.Server.Infrastructure.Auth
 {
     public class JwtService : IJwtService
     {

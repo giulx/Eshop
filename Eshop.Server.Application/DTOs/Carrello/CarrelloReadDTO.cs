@@ -1,11 +1,11 @@
-﻿using Eshop.Server.Dominio.OggettiValore;
+﻿using Eshop.Server.Domain.OggettiValore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Eshop.Server.Applicazione.DTOs.Carrello
+namespace Eshop.Server.Application.DTOs.Carrello
 {   public record CarrelloReadDTO(
         int Id,
         int ClienteId,

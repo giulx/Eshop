@@ -1,10 +1,10 @@
 ﻿using System.Threading.Tasks;
-using Eshop.Server.Applicazione.DTOs.Auth;
-using Eshop.Server.Applicazione.Interfacce;
-using Eshop.Server.Dominio.OggettiValore;
+using Eshop.Server.Application.DTOs.Auth;
+using Eshop.Server.Application.Interfacce;
+using Eshop.Server.Domain.OggettiValore;
 using Microsoft.AspNetCore.Identity;
 
-namespace Eshop.Server.Applicazione.ServiziApplicativi
+namespace Eshop.Server.Application.ServiziApplicativi
 {
     /// <summary>
     /// Servizio applicativo che si occupa di autenticazione (login).

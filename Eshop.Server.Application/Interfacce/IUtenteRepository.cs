@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Eshop.Server.Dominio.Modelli;
-using Eshop.Server.Dominio.OggettiValore;
+using Eshop.Server.Domain.Modelli;
+using Eshop.Server.Domain.OggettiValore;
 
-namespace Eshop.Server.Applicazione.Interfacce
+namespace Eshop.Server.Application.Interfacce
 {
     /// <summary>
     /// Contratto per l'accesso e la persistenza degli utenti.
-    /// Lo strato Applicazione dipende da questa interfaccia;
+    /// Lo strato Application dipende da questa interfaccia;
     /// l'implementazione concreta vive nello strato Infrastruttura.
     /// </summary>
     public interface IUtenteRepository

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\Eshop.Server.Dominio\Eshop.Server.Dominio.csproj" />
+    <ProjectReference Include="..\Eshop.Server.Domain\Eshop.Server.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,4 +1,4 @@
-namespace Eshop.Server.Applicazione.DTOs.Prodotto
+namespace Eshop.Server.Application.DTOs.Prodotto
 {
     /// <summary>
     /// DTO per la lettura dei dati di un prodotto.

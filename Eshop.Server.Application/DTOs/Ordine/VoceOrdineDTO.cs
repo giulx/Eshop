@@ -1,4 +1,4 @@
-namespace Eshop.Server.Applicazione.DTOs.Ordine
+namespace Eshop.Server.Application.DTOs.Ordine
 {
     /// <summary>
     /// DTO per una voce dell'ordine (singolo prodotto acquistato).

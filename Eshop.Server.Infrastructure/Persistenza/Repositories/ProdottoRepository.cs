@@ -1,11 +1,11 @@
 using Microsoft.EntityFrameworkCore;
-using Eshop.Server.Applicazione.Interfacce;
-using Eshop.Server.Dominio.Modelli;
-using Eshop.Server.Infrastruttura.Persistenza;
+using Eshop.Server.Application.Interfacce;
+using Eshop.Server.Domain.Modelli;
+using Eshop.Server.Infrastructure.Persistenza;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Eshop.Server.Infrastruttura.Persistenza.Repositories
+namespace Eshop.Server.Infrastructure.Persistenza.Repositories
 {
     /// Implementazione EF Core del repository per i prodotti.
     /// Gestisce tutte le operazioni CRUD sul database.

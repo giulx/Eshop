@@ -1,5 +1,5 @@
-﻿using Eshop.Server.Applicazione.DTOs.Carrello;
-using Eshop.Server.Applicazione.ServiziApplicativi;
+﻿using Eshop.Server.Application.DTOs.Carrello;
+using Eshop.Server.Application.ServiziApplicativi;
 using Eshop.Server.Api.Extensions; // per User.GetUserId()
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

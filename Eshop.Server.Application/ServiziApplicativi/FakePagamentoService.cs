@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Globalization;
 using System.Threading.Tasks;
-using Eshop.Server.Applicazione.Interfacce;
+using Eshop.Server.Application.Interfacce;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace Eshop.Server.Infrastruttura.Pagamenti
+namespace Eshop.Server.Infrastructure.Pagamenti
 {
     /// <summary>
     /// Servizio di pagamento finto.

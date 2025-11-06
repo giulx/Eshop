@@ -1,6 +1,6 @@
 using AutoMapper;
 
-namespace Eshop.Server.Applicazione.Mapping
+namespace Eshop.Server.Application.Mapping
 {
     public class MappingProfile : Profile
     {

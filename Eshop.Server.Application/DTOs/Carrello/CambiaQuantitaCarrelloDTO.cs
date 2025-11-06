@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using System.ComponentModel.DataAnnotations;
 
-namespace Eshop.Server.Applicazione.DTOs.Carrello
+namespace Eshop.Server.Application.DTOs.Carrello
 {
     public class CambiaQuantitaCarrelloDTO
     {

@@ -1,6 +1,6 @@
-using Eshop.Server.Dominio.Modelli;
+using Eshop.Server.Domain.Modelli;
 
-namespace Eshop.Server.Applicazione.Interfacce
+namespace Eshop.Server.Application.Interfacce
 {
     public interface IJwtService
     {

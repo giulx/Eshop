@@ -1,5 +1,5 @@
-﻿using Eshop.Server.Dominio.Modelli;
-using Eshop.Server.Dominio.OggettiValore;
+﻿using Eshop.Server.Domain.Modelli;
+using Eshop.Server.Domain.OggettiValore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -7,7 +7,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Eshop.Server.Infrastruttura.Persistenza
+namespace Eshop.Server.Infrastructure.Persistenza
 {
     public class DatabaseSeeder
     {

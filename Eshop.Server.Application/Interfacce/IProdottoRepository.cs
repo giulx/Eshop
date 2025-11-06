@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Eshop.Server.Dominio.Modelli;
+using Eshop.Server.Domain.Modelli;
 
-namespace Eshop.Server.Applicazione.Interfacce
+namespace Eshop.Server.Application.Interfacce
 {
     /// Contratto di accesso/persistenza per l'aggregato Prodotto.
-    /// Lo strato Applicazione dipende da questa interfaccia,
+    /// Lo strato Application dipende da questa interfaccia,
     /// mentre l'implementazione concreta vive nello strato Infrastruttura
     /// (es. tramite Entity Framework Core).
     public interface IProdottoRepository

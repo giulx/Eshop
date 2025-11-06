@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Eshop.Server.Applicazione.DTOs.Utente;
-using Eshop.Server.Applicazione.Interfacce;
-using Eshop.Server.Dominio.Modelli;
-using Eshop.Server.Dominio.OggettiValore;
+using Eshop.Server.Application.DTOs.Utente;
+using Eshop.Server.Application.Interfacce;
+using Eshop.Server.Domain.Modelli;
+using Eshop.Server.Domain.OggettiValore;
 using Microsoft.AspNetCore.Identity;
 
-namespace Eshop.Server.Applicazione.ServiziApplicativi
+namespace Eshop.Server.Application.ServiziApplicativi
 {
     /// <summary>
     /// Servizio applicativo per la gestione degli utenti.

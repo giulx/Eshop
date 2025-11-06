@@ -1,6 +1,6 @@
-using Eshop.Server.Dominio.OggettiValore;
+using Eshop.Server.Domain.OggettiValore;
 
-namespace Eshop.Server.Dominio.Modelli
+namespace Eshop.Server.Domain.Modelli
 {
     /// <summary>
     /// Riga di un ordine. Contiene lo snapshot del prodotto al momento dell’ordine.

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Eshop.Server.Applicazione.DTOs.Ordine
+namespace Eshop.Server.Application.DTOs.Ordine
 {
     /// <summary>
     /// Risultato della fase di "preview" dell'ordine:

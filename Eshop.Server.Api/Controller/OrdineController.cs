@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Eshop.Server.Api.Extensions; // User.GetUserId()
-using Eshop.Server.Applicazione.DTOs.Ordine;
-using Eshop.Server.Applicazione.ServiziApplicativi;
+using Eshop.Server.Application.DTOs.Ordine;
+using Eshop.Server.Application.ServiziApplicativi;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

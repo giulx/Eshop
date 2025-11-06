@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
-using Eshop.Server.Applicazione.DTOs.Auth;
-using Eshop.Server.Applicazione.ServiziApplicativi;
+using Eshop.Server.Application.DTOs.Auth;
+using Eshop.Server.Application.ServiziApplicativi;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Eshop.Server.Api.Controller

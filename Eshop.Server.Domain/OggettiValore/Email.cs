@@ -1,6 +1,6 @@
 using System;
 
-namespace Eshop.Server.Dominio.OggettiValore
+namespace Eshop.Server.Domain.OggettiValore
 {
     /// <summary>
     /// Value Object che rappresenta un indirizzo email valido.

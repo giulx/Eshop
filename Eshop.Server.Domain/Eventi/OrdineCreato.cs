@@ -1,7 +1,7 @@
 using System;
-using Eshop.Server.Dominio.Modelli;
+using Eshop.Server.Domain.Modelli;
 
-namespace Eshop.Server.Dominio.Eventi
+namespace Eshop.Server.Domain.Eventi
 {
     /// <summary>
     /// Evento di dominio che rappresenta la creazione di un nuovo ordine.

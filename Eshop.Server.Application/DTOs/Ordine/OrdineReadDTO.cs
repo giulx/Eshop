@@ -1,6 +1,6 @@
-using Eshop.Server.Dominio.Modelli;
+using Eshop.Server.Domain.Modelli;
 
-namespace Eshop.Server.Applicazione.DTOs.Ordine
+namespace Eshop.Server.Application.DTOs.Ordine
 {
     /// <summary>
     /// DTO di lettura per un ordine esistente.

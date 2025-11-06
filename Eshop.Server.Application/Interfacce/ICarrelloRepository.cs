@@ -1,7 +1,7 @@
-﻿using Eshop.Server.Dominio.Modelli;
+﻿using Eshop.Server.Domain.Modelli;
 using System.Threading.Tasks;
 
-namespace Eshop.Server.Applicazione.Interfacce
+namespace Eshop.Server.Application.Interfacce
 {
     /// <summary>
     /// Contratto di persistenza per il Carrello.

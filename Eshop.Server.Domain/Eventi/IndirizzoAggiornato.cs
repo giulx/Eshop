@@ -1,8 +1,8 @@
 using System;
-using Eshop.Server.Dominio.Modelli;
-using Eshop.Server.Dominio.OggettiValore;
+using Eshop.Server.Domain.Modelli;
+using Eshop.Server.Domain.OggettiValore;
 
-namespace Eshop.Server.Dominio.Eventi
+namespace Eshop.Server.Domain.Eventi
 {
     /// <summary>
     /// Evento di dominio che rappresenta l'aggiornamento dell'indirizzo di un utente.

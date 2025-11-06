@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Eshop.Server.Applicazione.DTOs.Utente
+namespace Eshop.Server.Application.DTOs.Utente
 {
     /// <summary>
     /// DTO per la creazione/registrazione di un nuovo utente.

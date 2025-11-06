@@ -1,7 +1,7 @@
 ﻿using System;
-using Eshop.Server.Dominio.OggettiValore;
+using Eshop.Server.Domain.OggettiValore;
 
-namespace Eshop.Server.Dominio.Modelli
+namespace Eshop.Server.Domain.Modelli
 {
     /// <summary>
     /// Riga del carrello, con snapshot del prezzo unitario al momento dell’aggiunta/aggiornamento.

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Eshop.Server.Applicazione.DTOs.Utente
+namespace Eshop.Server.Application.DTOs.Utente
 {
     /// <summary>
     /// DTO per l'aggiornamento dei dati di un utente esistente.

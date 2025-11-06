@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Eshop.Server.Infrastruttura.Migrations
+namespace Eshop.Server.Infrastructure.Migrations
 {
     /// <inheritdoc />
     public partial class InitMySql : Migration

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Eshop.Server.Applicazione.DTOs.Ordine
+namespace Eshop.Server.Application.DTOs.Ordine
 {
     /// <summary>
     /// DTO di esito della conferma ordine.

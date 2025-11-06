@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Eshop.Server.Applicazione.DTOs.Prodotto;
-using Eshop.Server.Applicazione.ServiziApplicativi;
+using Eshop.Server.Application.DTOs.Prodotto;
+using Eshop.Server.Application.ServiziApplicativi;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;

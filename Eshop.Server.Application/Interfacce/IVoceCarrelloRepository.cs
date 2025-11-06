@@ -1,11 +1,11 @@
-﻿using Eshop.Server.Dominio.Modelli;
+﻿using Eshop.Server.Domain.Modelli;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Eshop.Server.Applicazione.Interfacce
+namespace Eshop.Server.Application.Interfacce
 {
     public interface IVoceCarrelloRepository
     {

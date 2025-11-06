@@ -1,4 +1,4 @@
-namespace Eshop.Server.Infrastruttura.Seed
+namespace Eshop.Server.Infrastructure.Seed
 {
     public class DbSeeder
     {

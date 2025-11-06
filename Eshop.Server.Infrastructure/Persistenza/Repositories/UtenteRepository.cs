@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Eshop.Server.Applicazione.Interfacce;
-using Eshop.Server.Dominio.Modelli;
-using Eshop.Server.Dominio.OggettiValore;
-using Eshop.Server.Infrastruttura.Persistenza;
+using Eshop.Server.Application.Interfacce;
+using Eshop.Server.Domain.Modelli;
+using Eshop.Server.Domain.OggettiValore;
+using Eshop.Server.Infrastructure.Persistenza;
 
-namespace Eshop.Server.Infrastruttura.Persistenza.Repositories
+namespace Eshop.Server.Infrastructure.Persistenza.Repositories
 {
     /// <summary>
     /// Implementazione EF Core del repository per Utente.

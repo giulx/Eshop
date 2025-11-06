@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Eshop.Server.Dominio.OggettiValore;
+using Eshop.Server.Domain.OggettiValore;
 
-namespace Eshop.Server.Dominio.Modelli
+namespace Eshop.Server.Domain.Modelli
 {
     /// <summary>
     /// Aggregato Carrello: collezione di voci non vincolanti (niente stock lock).

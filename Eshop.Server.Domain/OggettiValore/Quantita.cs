@@ -1,6 +1,6 @@
 using System;
 
-namespace Eshop.Server.Dominio.OggettiValore
+namespace Eshop.Server.Domain.OggettiValore
 {
     /// <summary>
     /// Value Object che rappresenta una quantità > 0.

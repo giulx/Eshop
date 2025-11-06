@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using Eshop.Server.Dominio.OggettiValore;
-using Eshop.Server.Dominio.Eventi;
+using Eshop.Server.Domain.OggettiValore;
+using Eshop.Server.Domain.Eventi;
 
-namespace Eshop.Server.Dominio.Modelli
+namespace Eshop.Server.Domain.Modelli
 {
     /// Entità Utente nel dominio.
     /// Rappresenta un cliente o un amministratore dell'e-commerce.

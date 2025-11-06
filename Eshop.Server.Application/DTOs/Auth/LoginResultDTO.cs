@@ -1,4 +1,4 @@
-﻿namespace Eshop.Server.Applicazione.DTOs.Auth
+﻿namespace Eshop.Server.Application.DTOs.Auth
 {
     public class LoginResultDTO
     {

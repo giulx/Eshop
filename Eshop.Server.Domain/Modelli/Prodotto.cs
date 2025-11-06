@@ -1,7 +1,7 @@
 using System;
-using Eshop.Server.Dominio.OggettiValore;
+using Eshop.Server.Domain.OggettiValore;
 
-namespace Eshop.Server.Dominio.Modelli
+namespace Eshop.Server.Domain.Modelli
 {
     // Entità del dominio che rappresenta un prodotto vendibile nel catalogo.
     public class Prodotto

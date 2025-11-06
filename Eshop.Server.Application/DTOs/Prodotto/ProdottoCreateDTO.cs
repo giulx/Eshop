@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Eshop.Server.Applicazione.DTOs.Prodotto
+namespace Eshop.Server.Application.DTOs.Prodotto
 {
     /// <summary>
     /// DTO per la creazione di un nuovo prodotto nel catalogo.
