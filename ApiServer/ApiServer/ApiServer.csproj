@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<!-- Target framework .NET 8 -->
+		<TargetFramework>net8.0</TargetFramework>
+
+		<!-- Abilita i riferimenti nullabili -->
+		<Nullable>enable</Nullable>
+
+		<!-- Usings impliciti abilitati per ridurre il boilerplate -->
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!-- AutoMapper per mapping tra DTO e entità -->
+		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+
+		<!-- EF Core Tools: per migrazioni e CLI -->
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+
+		<!-- EF Core Design: supporto per design-time (migrazioni, scaffolding) -->
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.0">
+			<PrivateAssets>all</PrivateAssets>
+		</PackageReference>
+
+		<!-- Pomelo MySQL provider per EF Core -->
+		<PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="9.0.0" />
+
+		<!-- Swagger / OpenAPI -->
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+	</ItemGroup>
+
+</Project>
+
