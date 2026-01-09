@@ -1,59 +1,79 @@
-# E-commerce Web Multi-Tier
+# E-commerce Web Application – Multi-Tier Architecture
 
-## Descrizione del progetto
-Questo progetto è stato realizzato come **tesi in Reti di Calcolatori** e consiste nella progettazione e nello sviluppo di un sistema **e-commerce web** basato su un’**architettura multi-tier**, modulare e scalabile.
+## Overview
+Questo repository contiene un sistema **e-commerce web full-stack** sviluppato come **progetto di tesi in Reti di Calcolatori**.  
+Il lavoro si concentra sulla progettazione e implementazione di un’**architettura multi-tier** modulare e scalabile, con una chiara separazione tra livelli di presentazione, logica applicativa e persistenza dei dati.
 
-L’obiettivo del lavoro è dimostrare come una corretta separazione dei livelli applicativi consenta di realizzare applicazioni web robuste, manutenibili ed estendibili, sfruttando tecnologie moderne lato backend e frontend.
-
-Il sistema è suddiviso in:
-- **Backend** sviluppato in **.NET (C#)**, responsabile della logica di business e dell’accesso ai dati
-- **Frontend** sviluppato in **Angular (TypeScript)**, che fornisce l’interfaccia utente tramite una web application
-- **Database MySQL**, utilizzato per la persistenza dei dati
+L’applicazione consente la comunicazione client-server tramite una web application e API REST, simulando un contesto reale di utilizzo di sistemi distribuiti.
 
 ---
 
-## Architettura
-L’applicazione adotta un’architettura **multi-tier** composta da:
+## System Description
+Il sistema è composto da tre componenti principali:
 
-1. **Presentation Tier**  
-   Web application Angular che consente all’utente di interagire con il sistema tramite browser.
+- **Frontend**: web application sviluppata in Angular (TypeScript), responsabile dell’interazione con l’utente
+- **Backend**: applicazione server-side sviluppata in .NET (C#), che implementa la logica di business ed espone API REST
+- **Database**: sistema di gestione MySQL per la memorizzazione persistente dei dati applicativi
 
-2. **Application / Business Tier**  
-   Backend .NET che espone API REST per la gestione delle funzionalità applicative (utenti, prodotti, carrello, ordini).
-
-3. **Data Tier**  
-   Database MySQL che memorizza utenti, prodotti, carrelli e ordini.
-
-Questa suddivisione garantisce:
-- Separazione delle responsabilità
-- Maggiore scalabilità
-- Facilità di manutenzione ed estensione
+L’architettura è progettata per favorire manutenibilità, estendibilità e scalabilità del sistema.
 
 ---
 
-## Funzionalità principali
+## Architectural Model
+L’applicazione segue un modello **multi-tier**, articolato come segue:
 
-### Utente
+### Presentation Layer
+Livello di presentazione realizzato tramite Angular, accessibile via browser, che gestisce l’interfaccia utente e l’invio delle richieste HTTP al backend.
+
+### Application / Business Layer
+Livello applicativo implementato in .NET che gestisce:
+- logica di business
+- validazione dei dati
+- esposizione delle API REST
+- controllo dei flussi applicativi
+
+### Data Layer
+Livello di persistenza basato su MySQL, utilizzato per la gestione di utenti, prodotti, carrelli e ordini.
+
+Questa architettura consente una netta separazione delle responsabilità e un’evoluzione indipendente dei singoli livelli.
+
+---
+
+## Backend Structure
+Il backend è organizzato secondo una suddivisione a **moduli/layer**:
+
+- **API**: gestione delle richieste HTTP e degli endpoint REST
+- **Application**: servizi applicativi, casi d’uso e DTO
+- **Domain**: entità di dominio e logica core
+- **Infrastructure**: accesso ai dati, persistenza MySQL e servizi di supporto
+
+Questa struttura migliora la leggibilità del codice e riduce l’accoppiamento tra i componenti.
+
+---
+
+## Functionalities
+
+### User Features
 - Registrazione e autenticazione
-- Visualizzazione dei prodotti
+- Consultazione del catalogo prodotti
 - Gestione del carrello
-- Effettuazione di ordini (pagamento simulato)
+- Conferma degli ordini (pagamento simulato)
 - Visualizzazione dello storico ordini
 
-### Amministratore
-- Visualizzazione e gestione degli utenti
-- Visualizzazione e gestione dei prodotti
-- Visualizzazione e gestione degli ordini
+### Administrator Features
+- Gestione degli utenti
+- Gestione dei prodotti
+- Gestione degli ordini
 
-L’amministratore è implementato come **utente con privilegi speciali**.
+L’amministratore è implementato come **utente con privilegi estesi**.
 
 ---
 
-## Tecnologie utilizzate
+## Technologies
 
 ### Backend
 - .NET (C#)
-- API REST
+- RESTful APIs
 - MySQL
 
 ### Frontend
@@ -66,7 +86,7 @@ L’amministratore è implementato come **utente con privilegi speciali**.
 
 ---
 
-## Struttura del progetto
+## Repository Structure
 
 ```text
 my-project/
@@ -78,27 +98,17 @@ my-project/
 
 ---
 
-## Avvio del progetto
-
-### Backend
-1. Accedere alla cartella backend
-2. Configurare la connessione al database MySQL
-3. Avviare l’applicazione backend
-
-### Frontend
-1. Accedere alla cartella frontend
-2. Installare le dipendenze
-3. Avviare il server di sviluppo Angular
+## Execution
+Il progetto è strutturato per essere eseguito separatamente lato frontend e backend, consentendo una chiara distinzione tra client e server.
 
 ---
 
-## Note
+## Notes
 - Il sistema di pagamento è **simulato** e non utilizza servizi di pagamento reali.
-- Il progetto è stato sviluppato a scopo **didattico e sperimentale**.
+- Il progetto è stato sviluppato esclusivamente a scopo **didattico e accademico**.
 
 ---
 
-## Autore
+## Author
 Progetto di tesi in Reti di Calcolatori  
-Sviluppato da Giulia Nuzzi
-
+**Giulia Nuzzi**
