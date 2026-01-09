@@ -1,8 +1,42 @@
-# Build output
-bin/
-obj/
-
-# User-specific
+# ===============================
+# OS / Editor
+# ===============================
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
 *.user
 *.suo
-*.vs/
+.vs/
+
+# ===============================
+# .NET / Visual Studio
+# ===============================
+**/bin/
+**/obj/
+*.pdb
+*.cache
+*.log
+
+# ===============================
+# NuGet
+# ===============================
+**/packages/
+*.nupkg
+
+# ===============================
+# Angular / Node
+# ===============================
+**/node_modules/
+**/dist/
+**/.angular/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ===============================
+# Environment / Secrets
+# ===============================
+.env
+.env.*
+!.env.example
