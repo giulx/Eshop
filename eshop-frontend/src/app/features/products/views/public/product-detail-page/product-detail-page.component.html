@@ -1,0 +1,58 @@
+<a routerLink="/prodotti" class="back-link">
+  ← Torna ai prodotti
+</a>
+
+@if (loading()) {
+  <p>Caricamento prodotto...</p>
+}
+
+@if (error()) {
+  <p class="status-error">{{ error() }}</p>
+}
+
+@if (!loading() && !error() && product(); as product) {
+  <div class="product-detail">
+    <h1>{{ product.name }}</h1>
+
+    <p class="description">
+      {{ product.description }}
+    </p>
+
+    <p class="price">
+      <strong>Prezzo:</strong>
+      {{ product.price | currency: product.currency }}
+    </p>
+
+    <p class="stock">
+      <strong>Disponibili:</strong>
+      {{ product.availableQuantity }}
+    </p>
+
+    @if (addError()) {
+      <p class="status-error">{{ addError() }}</p>
+    }
+
+    @if (addSuccess()) {
+      <p class="status-success">{{ addSuccess() }}</p>
+    }
+
+    <button
+      type="button"
+      class="btn-add-to-cart"
+      (click)="onAddToCart()"
+      [disabled]="adding() || product.availableQuantity <= 0"
+    >
+      {{ adding() ? 'Aggiungo...' : 'Aggiungi al carrello' }}
+    </button>
+  </div>
+}
+
+@if (toastMessage()) {
+  <div
+    class="toast"
+    [class.toast-success]="toastType() === 'success'"
+    [class.toast-error]="toastType() === 'error'"
+  >
+    {{ toastMessage() }}
+  </div>
+}

@@ -1,0 +1,204 @@
+<div class="page">
+  <h1>Modifica utente</h1>
+
+  <div class="page-card">
+    @if (vm.loading()) {
+      <p class="status">Caricamento dati utente...</p>
+    }
+
+    @if (vm.error()) {
+      <p class="status status-error">{{ vm.error() }}</p>
+    }
+
+    @if (!vm.loading() && !vm.error()) {
+      <div class="user-info">
+        <p><strong>ID:</strong> {{ vm.userId() }}</p>
+        <p><strong>Email:</strong> {{ vm.email() }}</p>
+
+        <p>
+          <strong>Ruolo:</strong>
+          <span class="badge" [class.badge-admin]="vm.isAdmin()">
+            {{ vm.isAdmin() ? 'Admin' : 'Cliente' }}
+          </span>
+        </p>
+      </div>
+
+      @if (vm.success()) {
+        <p class="status status-success">{{ vm.success() }}</p>
+      }
+
+      <form
+        class="form"
+        #f="ngForm"
+        (ngSubmit)="onSubmit()"
+        novalidate
+      >
+        <!-- NOME -->
+        <div class="form-row">
+          <label for="name">Nome</label>
+          <input
+            id="name"
+            name="name"
+            type="text"
+            autocomplete="given-name"
+            [(ngModel)]="vm.formModel().name"
+            required
+            maxlength="50"
+            #name="ngModel"
+            [disabled]="vm.saving()"
+          />
+          @if (name.invalid && (name.dirty || name.touched)) {
+            <p class="field-error">
+              @if (name.errors?.['required']) { Il nome è obbligatorio. }
+              @if (name.errors?.['maxlength']) { Il nome è troppo lungo (max 50). }
+            </p>
+          }
+        </div>
+
+        <!-- COGNOME -->
+        <div class="form-row">
+          <label for="surname">Cognome</label>
+          <input
+            id="surname"
+            name="surname"
+            type="text"
+            autocomplete="family-name"
+            [(ngModel)]="vm.formModel().surname"
+            required
+            maxlength="50"
+            #surname="ngModel"
+            [disabled]="vm.saving()"
+          />
+          @if (surname.invalid && (surname.dirty || surname.touched)) {
+            <p class="field-error">
+              @if (surname.errors?.['required']) { Il cognome è obbligatorio. }
+              @if (surname.errors?.['maxlength']) { Il cognome è troppo lungo (max 50). }
+            </p>
+          }
+        </div>
+
+        <!-- INDIRIZZO -->
+        <div class="form-row">
+          <label for="street">Indirizzo</label>
+          <input
+            id="street"
+            name="street"
+            type="text"
+            autocomplete="address-line1"
+            [(ngModel)]="vm.formModel().street"
+            maxlength="200"
+            #street="ngModel"
+            [disabled]="vm.saving()"
+          />
+          @if (street.invalid && (street.dirty || street.touched)) {
+            <p class="field-error">
+              @if (street.errors?.['maxlength']) { Indirizzo troppo lungo (max 200). }
+            </p>
+          }
+        </div>
+
+        <!-- CITTA -->
+        <div class="form-row">
+          <label for="city">Città</label>
+          <input
+            id="city"
+            name="city"
+            type="text"
+            autocomplete="address-level2"
+            [(ngModel)]="vm.formModel().city"
+            maxlength="200"
+            #city="ngModel"
+            [disabled]="vm.saving()"
+          />
+          @if (city.invalid && (city.dirty || city.touched)) {
+            <p class="field-error">
+              @if (city.errors?.['maxlength']) { Città troppo lunga (max 200). }
+            </p>
+          }
+        </div>
+
+        <!-- CAP -->
+        <div class="form-row">
+          <label for="postalCode">CAP</label>
+          <input
+            id="postalCode"
+            name="postalCode"
+            type="text"
+            inputmode="numeric"
+            autocomplete="postal-code"
+            [(ngModel)]="vm.formModel().postalCode"
+            maxlength="10"
+            #postalCode="ngModel"
+            [disabled]="vm.saving()"
+          />
+          @if (postalCode.invalid && (postalCode.dirty || postalCode.touched)) {
+            <p class="field-error">
+              @if (postalCode.errors?.['maxlength']) { CAP troppo lungo (max 10). }
+            </p>
+          }
+        </div>
+
+        <!-- NUMERO CIVICO -->
+        <div class="form-row">
+          <label for="number">Numero civico</label>
+          <input
+            id="number"
+            name="number"
+            type="text"
+            autocomplete="address-line2"
+            [(ngModel)]="vm.formModel().number"
+            maxlength="20"
+            #number="ngModel"
+            [disabled]="vm.saving()"
+          />
+          @if (number.invalid && (number.dirty || number.touched)) {
+            <p class="field-error">
+              @if (number.errors?.['maxlength']) { Numero civico troppo lungo (max 20). }
+            </p>
+          }
+        </div>
+
+        <!-- PASSWORD -->
+        <div class="form-row">
+          <label for="nuovaPassword">Nuova password</label>
+          <input
+            id="nuovaPassword"
+            name="nuovaPassword"
+            type="password"
+            autocomplete="new-password"
+            placeholder="Lascia vuoto per non cambiarla"
+            [(ngModel)]="vm.formModel().nuovaPassword"
+            minlength="8"
+            maxlength="100"
+            #nuovaPassword="ngModel"
+            [disabled]="vm.saving()"
+          />
+          @if (nuovaPassword.invalid && (nuovaPassword.dirty || nuovaPassword.touched)) {
+            <p class="field-error">
+              @if (nuovaPassword.errors?.['minlength']) { Password troppo corta (min 8). }
+              @if (nuovaPassword.errors?.['maxlength']) { Password troppo lunga (max 100). }
+            </p>
+          }
+        </div>
+
+        <div class="form-actions">
+          <button
+            type="button"
+            class="btn-secondary"
+            (click)="vm.backToList()"
+            [disabled]="vm.saving()"
+          >
+            ← Torna alla lista
+          </button>
+
+          <button
+            type="submit"
+            [disabled]="vm.saving() || f.invalid"
+          >
+            {{ vm.saving() ? 'Salvataggio...' : 'Salva modifiche' }}
+          </button>
+        </div>
+      </form>
+    }
+  </div>
+</div>

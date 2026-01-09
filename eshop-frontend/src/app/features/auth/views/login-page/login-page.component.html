@@ -1,0 +1,81 @@
+<div class="page">
+  <h1>Accedi</h1>
+
+  <div class="form-card">
+    <form (ngSubmit)="vm.onSubmit()" #loginForm="ngForm">
+      <!-- EMAIL -->
+      <div class="field">
+        <label for="email">Email</label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          [(ngModel)]="vm.formModel.email"
+          autocomplete="email"
+          required
+        />
+
+        @if (loginForm.submitted && !vm.formModel.email) {
+          <small class="error-msg">Inserisci la tua email.</small>
+        }
+
+        @if (vm.errorCode === 'user_not_found') {
+          <small class="error-msg">Nessun utente trovato con questa email.</small>
+        }
+
+        @if (vm.errorCode === 'invalid_email') {
+          <small class="error-msg">Formato email non valido.</small>
+        }
+      </div>
+
+      <!-- PASSWORD -->
+      <div class="field">
+        <label for="password">Password</label>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          [(ngModel)]="vm.formModel.password"
+          autocomplete="current-password"
+          required
+        />
+
+        @if (loginForm.submitted && !vm.formModel.password) {
+          <small class="error-msg">Inserisci la password.</small>
+        }
+
+        @if (vm.errorCode === 'wrong_password') {
+          <small class="error-msg">Password errata. Riprova.</small>
+        }
+
+        @if (vm.errorCode === 'account_locked') {
+          <small class="error-msg">Troppi tentativi falliti. Riprova tra qualche minuto.</small>
+        }
+      </div>
+
+      @if (vm.error && !vm.errorCode) {
+        <p class="status status-error">{{ vm.error }}</p>
+      }
+
+      @if (vm.loading) {
+        <p class="status">Accesso in corso...</p>
+      }
+
+      <!-- BOTTONI -->
+      <div class="actions">
+        <button
+          type="submit"
+          class="btn-primary"
+          [disabled]="vm.loading || loginForm.invalid"
+        >
+          {{ vm.loading ? 'Accesso in corso...' : 'Accedi' }}
+        </button>
+      </div>
+
+      <p class="register-hint">
+        Non hai ancora un account?
+        <a routerLink="/registrati">Registrati ora</a>
+      </p>
+    </form>
+  </div>
+</div>

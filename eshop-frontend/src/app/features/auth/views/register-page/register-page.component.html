@@ -1,0 +1,209 @@
+<div class="page">
+  <h1>Crea il tuo account</h1>
+
+  <div class="page-card">
+    <!-- Messaggi globali -->
+    <div class="status-messages">
+      @if (error()) {
+        <p class="status status-error" role="alert">
+          {{ error() }}
+        </p>
+      }
+
+      @if (success()) {
+        <p class="status status-success" role="status">
+          {{ success() }}
+        </p>
+      }
+    </div>
+
+    <div class="layout">
+      <!-- Colonna info -->
+      <section class="intro" aria-label="Vantaggi registrazione">
+        <h2>Benvenuto in Eshop</h2>
+        <p>Registrati per acquistare, salvare indirizzi e consultare gli ordini.</p>
+
+        <ul class="benefits">
+          <li>✔ Checkout più veloce</li>
+          <li>✔ Storico ordini sempre disponibile</li>
+          <li>✔ Indirizzi salvati in sicurezza</li>
+        </ul>
+
+        <p class="already">
+          Hai già un account?
+          <a routerLink="/login">Accedi</a>
+        </p>
+      </section>
+
+      <!-- Colonna form -->
+      <section class="form-wrapper" aria-label="Modulo registrazione">
+        <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+          <!-- DATI PERSONALI -->
+          <h3>Dati personali</h3>
+
+          <div class="form-grid two-cols">
+            <div class="form-field">
+              <label for="name">Nome *</label>
+              <input
+                id="name"
+                type="text"
+                formControlName="name"
+                autocomplete="given-name"
+                [class.invalid]="shouldShowError('name')"
+                [attr.aria-invalid]="ariaInvalid('name')"
+              />
+              @if (shouldShowError('name')) {
+                <small class="error-msg">{{ getErrorMessage('name') }}</small>
+              }
+            </div>
+
+            <div class="form-field">
+              <label for="surname">Cognome *</label>
+              <input
+                id="surname"
+                type="text"
+                formControlName="surname"
+                autocomplete="family-name"
+                [class.invalid]="shouldShowError('surname')"
+                [attr.aria-invalid]="ariaInvalid('surname')"
+              />
+              @if (shouldShowError('surname')) {
+                <small class="error-msg">{{ getErrorMessage('surname') }}</small>
+              }
+            </div>
+          </div>
+
+          <!-- CREDENZIALI -->
+          <h3>Credenziali</h3>
+
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="email">Email *</label>
+              <input
+                id="email"
+                type="email"
+                formControlName="email"
+                autocomplete="email"
+                inputmode="email"
+                [class.invalid]="shouldShowError('email')"
+                [attr.aria-invalid]="ariaInvalid('email')"
+              />
+              @if (shouldShowError('email')) {
+                <small class="error-msg">{{ getErrorMessage('email') }}</small>
+              }
+            </div>
+
+            <div class="form-field">
+              <div class="label-row">
+                <label for="password">Password *</label>
+
+                <button
+                  type="button"
+                  class="link-mini"
+                  (click)="togglePassword()"
+                  [attr.aria-pressed]="passwordVisible()"
+                  aria-label="Mostra o nascondi password">
+                  {{ passwordVisible() ? 'Nascondi' : 'Mostra' }}
+                </button>
+              </div>
+
+              <input
+                id="password"
+                [type]="passwordVisible() ? 'text' : 'password'"
+                formControlName="password"
+                autocomplete="new-password"
+                [class.invalid]="shouldShowError('password')"
+                [attr.aria-invalid]="ariaInvalid('password')"
+              />
+
+              <small class="hint">Minimo 8 caratteri</small>
+
+              @if (shouldShowError('password')) {
+                <small class="error-msg">{{ getErrorMessage('password') }}</small>
+              }
+            </div>
+          </div>
+
+          <!-- INDIRIZZO -->
+          <h3>Indirizzo</h3>
+
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="street">Via *</label>
+              <input
+                id="street"
+                type="text"
+                formControlName="street"
+                autocomplete="address-line1"
+                [class.invalid]="shouldShowError('street')"
+                [attr.aria-invalid]="ariaInvalid('street')"
+              />
+              @if (shouldShowError('street')) {
+                <small class="error-msg">{{ getErrorMessage('street') }}</small>
+              }
+            </div>
+
+            <div class="form-grid two-cols">
+              <div class="form-field">
+                <label for="city">Città *</label>
+                <input
+                  id="city"
+                  type="text"
+                  formControlName="city"
+                  autocomplete="address-level2"
+                  [class.invalid]="shouldShowError('city')"
+                  [attr.aria-invalid]="ariaInvalid('city')"
+                />
+                @if (shouldShowError('city')) {
+                  <small class="error-msg">{{ getErrorMessage('city') }}</small>
+                }
+              </div>
+
+              <div class="form-field">
+                <label for="postalCode">CAP *</label>
+                <input
+                  id="postalCode"
+                  type="text"
+                  formControlName="postalCode"
+                  autocomplete="postal-code"
+                  inputmode="numeric"
+                  [class.invalid]="shouldShowError('postalCode')"
+                  [attr.aria-invalid]="ariaInvalid('postalCode')"
+                />
+                @if (shouldShowError('postalCode')) {
+                  <small class="error-msg">{{ getErrorMessage('postalCode') }}</small>
+                }
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label for="number">Numero civico *</label>
+              <input
+                id="number"
+                type="text"
+                formControlName="number"
+                autocomplete="address-line2"
+                [class.invalid]="shouldShowError('number')"
+                [attr.aria-invalid]="ariaInvalid('number')"
+              />
+              @if (shouldShowError('number')) {
+                <small class="error-msg">{{ getErrorMessage('number') }}</small>
+              }
+            </div>
+          </div>
+
+          <!-- AZIONI -->
+          <div class="actions">
+            <a routerLink="/login" class="btn-secondary">
+              Ho già un account
+            </a>
+
+            <button type="submit" class="btn-primary" [disabled]="!canSubmit()">
+              {{ loading() ? "Registrazione in corso…" : "Registrati" }}
+            </button>
+          </div>
+        </form>
+      </section>
+    </div>
+  </div>
+</div>

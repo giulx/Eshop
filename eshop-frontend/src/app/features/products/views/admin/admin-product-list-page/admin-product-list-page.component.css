@@ -1,0 +1,170 @@
+/* Contenitore principale */
+:host {
+  display: block;
+  min-height: 100vh;
+  background: #f3f4f6; /* grigino chiaro */
+  padding: 2rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* "Card" centrale */
+h1 {
+  margin-bottom: 1rem;
+  color: var(--header-bg); /* blu scuro */
+}
+
+.page-card {
+  background: #ffffff;
+  border-radius: 6px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.08);
+}
+
+/* Pulsante "Nuovo prodotto" in alto */
+.page-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+}
+
+button {
+  font: inherit;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  padding: 0.45rem 0.9rem;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+/* Bottone principale (lo useremo per + Nuovo prodotto) */
+button.primary {
+  background: var(--header-bg); /* blu scuro */
+  color: #ffffff;
+  border-color: var(--header-bg);
+}
+
+button.primary:hover {
+  background: var(--header-bg-hover); /* blu un po’ più chiaro */
+  border-color: var(--header-bg-hover);
+}
+
+/* Bottoni di azione nella tabella */
+button.secondary {
+  background: #e5e7eb; /* grigio chiaro */
+  color: #111827;
+  border-color: #d1d5db;
+}
+
+button.secondary:hover {
+  background: #d1d5db;
+}
+
+button.danger {
+  background: #fee2e2; /* rosino chiaro */
+  color: #b91c1c;
+  border-color: #fecaca;
+}
+
+button.danger:hover {
+  background: #fecaca;
+}
+
+/* Separazione fra bottoni nella stessa cella */
+td button + button {
+  margin-left: 0.35rem;
+}
+
+/* Messaggi stato */
+p {
+  margin: 0.25rem 0 0.5rem;
+}
+
+p[style*="color:red"] {
+  margin-top: 0.5rem;
+}
+
+/* Tabella prodotti */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+}
+
+thead {
+  background: var(--header-bg);
+  color: #ffffff;
+}
+
+th,
+td {
+  padding: 0.6rem 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+th {
+  font-weight: 600;
+}
+
+tbody tr:nth-child(even) {
+  background: #f9fafb;
+}
+
+tbody tr:hover {
+  background: #eff6ff; /* azzurrino molto leggero all’hover */
+}
+
+/* Sezione "nessun prodotto" */
+.empty-state {
+  padding: 1rem 0;
+  color: #6b7280;
+  font-style: italic;
+}
+
+/* =========================
+   MODAL conferma eliminazione
+   ========================= */
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  z-index: 999;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: min(520px, calc(100vw - 2rem));
+  transform: translate(-50%, -50%);
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 1rem;
+  z-index: 1000;
+  box-shadow: 0 16px 50px rgba(15, 23, 42, 0.25);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.modal h2 {
+  margin: 0 0 0.5rem;
+  color: #111827;
+  font-size: 1.05rem;
+}
+
+.modal p {
+  margin: 0 0 1rem;
+  color: #374151;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}

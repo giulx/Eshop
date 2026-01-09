@@ -1,0 +1,188 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background: #f3f4f6;
+  padding: 2rem 1rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.page {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+h1 {
+  margin-bottom: 1rem;
+  color: var(--header-bg);
+}
+
+/* Card */
+.page-card {
+  background: #ffffff;
+  border-radius: 6px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.08);
+}
+
+/* Ricerca */
+.page-actions {
+  margin-bottom: 1rem;
+}
+
+.search-form {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.search-form input {
+  flex: 1 1 220px;
+  padding: 0.4rem 0.6rem;
+  border-radius: 4px;
+  border: 1px solid #d1d5db;
+  background: #f9fafb;
+}
+
+.search-form input:focus {
+  outline: none;
+  border-color: var(--header-bg);
+  box-shadow: 0 0 0 1px var(--header-bg);
+  background: #ffffff;
+}
+
+.search-form button {
+  padding: 0.4rem 0.9rem;
+  border-radius: 4px;
+  border: 1px solid var(--header-bg);
+  background: var(--header-bg);
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, filter 0.15s ease;
+}
+
+.search-form button:hover:not(:disabled) {
+  filter: brightness(0.95);
+}
+
+.search-form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: #e5e7eb;
+  color: #111827;
+  border-color: #d1d5db;
+}
+
+/* Stato */
+.status {
+  margin-bottom: 0.5rem;
+  color: #4b5563;
+}
+
+.status-error {
+  color: #b91c1c;
+}
+
+/* Empty */
+.empty-state {
+  padding: 1rem 0;
+  color: #6b7280;
+  font-style: italic;
+}
+
+/* Tabella */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 0.5rem;
+}
+
+th,
+td {
+  padding: 0.5rem 0.6rem;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: left;
+}
+
+th {
+  font-weight: 600;
+  color: #374151;
+  background: #e5e7eb;
+}
+
+tbody tr:hover {
+  background: #f9fafb;
+}
+
+/* Badge */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.badge-admin {
+  background: var(--header-bg);
+  color: #ffffff;
+}
+
+/* Link */
+.link-action {
+  color: var(--header-bg);
+  text-decoration: none;
+  font-size: 0.92rem;
+}
+
+.link-action:hover {
+  text-decoration: underline;
+}
+
+/* Footer */
+.summary {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  color: #374151;
+}
+
+/* Paginazione (resa coerente e “da footer”) */
+.pagination {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border-top: 1px solid #e5e7eb;
+  padding-top: 0.75rem;
+}
+
+.page-info {
+  font-size: 0.9rem;
+  color: #374151;
+}
+
+/* Bottoni paginazione: più leggeri e coerenti */
+.pagination button {
+  font: inherit;
+  border-radius: 4px;
+  border: 1px solid #d1d5db;
+  padding: 0.35rem 0.8rem;
+  background: #f9fafb;
+  color: #111827;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.pagination button:hover:not(:disabled) {
+  background: #e5e7eb;
+}
+
+.pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

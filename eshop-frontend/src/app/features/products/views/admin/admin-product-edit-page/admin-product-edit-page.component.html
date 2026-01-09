@@ -1,0 +1,97 @@
+<div class="page">
+  <h1>{{ isEditMode ? 'Modifica prodotto' : 'Nuovo prodotto' }}</h1>
+
+  <div class="top-actions">
+    <button type="button" (click)="goBack()">
+      ← Torna alla lista
+    </button>
+  </div>
+
+  <div class="form-card">
+    <div class="status-messages">
+      @if (vm.loading$ | async) {
+        <p>Operazione in corso...</p>
+      }
+
+      @if (vm.error$ | async; as error) {
+        <p class="status status-error">{{ error }}</p>
+      }
+
+      @if (vm.success$ | async; as success) {
+        <p class="status status-success">{{ success }}</p>
+      }
+    </div>
+
+    <form (ngSubmit)="onSubmit()" #prodForm="ngForm" novalidate>
+      <div class="form-field">
+        <label for="name">Nome</label>
+        <input
+          id="name"
+          name="name"
+          [(ngModel)]="formModel.name"
+          required
+          maxlength="100"
+          autocomplete="off"
+        />
+      </div>
+
+      <div class="form-field">
+        <label for="description">Descrizione</label>
+        <textarea
+          id="description"
+          name="description"
+          [(ngModel)]="formModel.description"
+          maxlength="500"
+          rows="3"
+        ></textarea>
+      </div>
+
+      <div class="form-field">
+        <label for="price">Prezzo</label>
+        <input
+          id="price"
+          name="price"
+          type="number"
+          step="0.01"
+          min="0.01"
+          [(ngModel)]="formModel.price"
+          required
+        />
+      </div>
+
+      <div class="form-field">
+        <label for="currency">Valuta</label>
+        <select
+          id="currency"
+          name="currency"
+          [(ngModel)]="formModel.currency"
+          required
+        >
+          @for (c of vm.currencies; track c.code) {
+            <option [value]="c.code">{{ c.label }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="form-field">
+        <label for="availableQuantity">Quantità disponibile</label>
+        <input
+          id="availableQuantity"
+          name="availableQuantity"
+          type="number"
+          min="0"
+          [(ngModel)]="formModel.availableQuantity"
+          required
+        />
+      </div>
+
+      <button
+        type="submit"
+        class="btn-primary"
+        [disabled]="prodForm.invalid || (vm.loading$ | async)"
+      >
+        {{ isEditMode ? 'Aggiorna prodotto' : 'Crea prodotto' }}
+      </button>
+    </form>
+  </div>
+</div>

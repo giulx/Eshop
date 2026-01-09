@@ -1,0 +1,95 @@
+<div class="app-shell">
+  <!-- ===========================
+       HEADER / NAVBAR
+       =========================== -->
+  <header class="app-header">
+    <!-- Logo -->
+    <div class="logo">
+      <img src="eshop-icon.png" alt="Logo Eshop" class="logo-img" />
+      <span class="brand">Eshop</span>
+    </div>
+
+    <!-- ===========================
+         NAVBAR
+         =========================== -->
+    <nav class="app-nav">
+      @if (isAdmin()) {
+        <a
+          routerLink="/admin/ordini"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          Ordini
+        </a>
+
+        <a routerLink="/admin/prodotti" routerLinkActive="active">
+          Prodotti
+        </a>
+
+        <a routerLink="/admin/utenti" routerLinkActive="active">
+          Utenti
+        </a>
+      } @else {
+        <a
+          routerLink="/prodotti"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          Catalogo
+        </a>
+
+        @if (user()) {
+          <a routerLink="/carrello" routerLinkActive="active">
+            Carrello
+          </a>
+
+          <a routerLink="/ordini" routerLinkActive="active">
+            I miei ordini
+          </a>
+        } @else {
+          <a routerLink="/login">
+            Carrello
+          </a>
+        }
+      }
+    </nav>
+
+    <!-- ===========================
+         USER AREA
+         =========================== -->
+    <div class="user-area">
+      @if (user(); as u) {
+        <span class="user-name">
+          Ciao, {{ u.name || 'utente' }}
+        </span>
+
+        @if (!u.isAdmin) {
+          <a routerLink="/profilo" class="user-link">
+            Profilo
+          </a>
+        }
+
+        <button type="button" (click)="onLogout()">
+          Esci
+        </button>
+      } @else {
+        <div class="guest-links">
+          <a routerLink="/login" class="btn-login-nav">
+            Accedi
+          </a>
+
+          <a routerLink="/registrati" class="btn-register-nav">
+            Registrati
+          </a>
+        </div>
+      }
+    </div>
+  </header>
+
+  <!-- ===========================
+       CONTENUTO PRINCIPALE
+       =========================== -->
+  <main class="app-main">
+    <router-outlet></router-outlet>
+  </main>
+</div>

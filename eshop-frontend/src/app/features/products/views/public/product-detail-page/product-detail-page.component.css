@@ -1,0 +1,135 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background: #f3f4f6;
+  padding: 2rem 1rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* Link "torna indietro" */
+.back-link {
+  display: inline-block;
+  margin-bottom: 1rem;
+  text-decoration: none;
+  color: var(--header-bg);
+  font-size: 0.95rem;
+  transition: opacity 0.2s ease;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+  opacity: 0.8;
+}
+
+/* Card prodotto */
+.product-detail {
+  max-width: 720px;
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 1.75rem;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+}
+
+.product-detail h1 {
+  margin-bottom: 0.75rem;
+  color: var(--header-bg);
+  font-size: 1.7rem;
+  font-weight: 600;
+}
+
+/* Descrizione prodotto */
+.product-detail .description {
+  margin-bottom: 1rem;
+  color: #4b5563;
+  line-height: 1.55;
+  font-size: 1rem;
+}
+
+/* Prezzo e stock */
+.product-detail .price,
+.product-detail .stock {
+  margin-bottom: 0.5rem;
+  color: #111827;
+  font-size: 1rem;
+}
+
+/* Messaggi di stato inline */
+.status-error {
+  margin-top: 0.75rem;
+  padding: 0.4rem 0;
+  color: #b91c1c;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.status-success {
+  margin-top: 0.75rem;
+  padding: 0.4rem 0;
+  color: #15803d;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+/* Bottone "Aggiungi al carrello" */
+.btn-add-to-cart {
+  margin-top: 1.3rem;
+  font: inherit;
+  border-radius: 6px;
+  border: 1px solid var(--header-bg);
+  padding: 0.65rem 1.5rem;
+  background: var(--header-bg);
+  color: #ffffff;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.08s ease;
+  font-size: 1rem;
+}
+
+.btn-add-to-cart:hover:not(:disabled) {
+  background: var(--header-bg-hover);
+  border-color: var(--header-bg-hover);
+}
+
+.btn-add-to-cart:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+.btn-add-to-cart:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* Toast notification */
+.toast {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  max-width: 280px;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.25);
+  color: #ffffff;
+  z-index: 1000;
+  opacity: 0.98;
+  animation: toast-in 0.2s ease-out;
+}
+
+.toast-success {
+  background: #15803d;
+}
+
+.toast-error {
+  background: #b91c1c;
+}
+
+@keyframes toast-in {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 0.98;
+  }
+}

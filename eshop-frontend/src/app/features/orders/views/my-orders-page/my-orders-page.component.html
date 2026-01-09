@@ -1,0 +1,90 @@
+<div class="page">
+  <h1>I miei ordini</h1>
+
+  <div class="page-card">
+    <div class="status-messages">
+      @if (vm.loading) {
+        <p class="status">Caricamento ordini...</p>
+      }
+
+      @if (vm.error) {
+        <p class="status status-error">{{ vm.error }}</p>
+      }
+
+      @if (vm.success) {
+        <p class="status status-success">{{ vm.success }}</p>
+      }
+    </div>
+
+    @if (!vm.loading && !vm.error) {
+      @if (vm.orders.length === 0) {
+        <div class="empty-state">
+          <p>Non hai ancora effettuato ordini.</p>
+          <a routerLink="/prodotti" class="link">Vai al catalogo</a>
+        </div>
+      }
+
+      @if (vm.orders.length > 0) {
+        <table class="orders-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Data</th>
+              <th>Stato</th>
+              <th>Totale</th>
+              <th class="col-actions">Azioni</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            @for (order of vm.orders; track order.id) {
+              <tr>
+                <td>#{{ order.id }}</td>
+
+                <td>
+                  {{ order.creationDate | date:'dd/MM/yyyy HH:mm' }}
+                </td>
+
+                <td>
+                  <span
+                    class="badge"
+                    [class.badge-paid]="order.status === 0"
+                    [class.badge-processing]="order.status === 1"
+                    [class.badge-shipped]="order.status === 2"
+                    [class.badge-cancelled]="order.status === 3"
+                  >
+                    {{ vm.getStatusLabel(order.status) }}
+                  </span>
+                </td>
+
+                <td>
+                  {{ order.total | number:'1.2-2' }} EUR
+                </td>
+
+                <td class="actions">
+                  <a
+                    [routerLink]="['/ordine', order.id]"
+                    class="btn-details"
+                  >
+                    Dettagli
+                  </a>
+
+                  @if (vm.canCancel(order)) {
+                    <button
+                      type="button"
+                      class="btn-cancel"
+                      (click)="vm.cancel(order)"
+                      [disabled]="vm.isCancelling(order)"
+                    >
+                      {{ vm.isCancelling(order) ? 'Annullamento...' : 'Annulla' }}
+                    </button>
+                  }
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      }
+    }
+  </div>
+</div>

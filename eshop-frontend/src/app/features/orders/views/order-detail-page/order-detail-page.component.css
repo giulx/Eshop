@@ -1,0 +1,144 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background: #f3f4f6;
+  padding: 2rem 1rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.page {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+h1 {
+  margin-bottom: 1rem;
+  color: var(--header-bg);
+  font-size: 1.6rem;
+}
+
+.page-card {
+  background: #ffffff;
+  border-radius: 6px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.08);
+}
+
+/* Status */
+.status-messages {
+  margin-bottom: 1rem;
+}
+
+.status {
+  margin: 0.25rem 0;
+  font-size: 0.95rem;
+  color: #4b5563;
+}
+
+.status-error {
+  color: #b91c1c;
+}
+
+/* Header ordine */
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+
+.order-id {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.order-date {
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+/* Badge stato (stesso stile di my-orders) */
+.badge {
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.badge-paid {
+  background: #15803d;
+  color: white;
+}
+
+.badge-processing {
+  background: #f59e0b;
+  color: white;
+}
+
+.badge-shipped {
+  background: #0ea5e9;
+  color: white;
+}
+
+.badge-cancelled {
+  background: #b91c1c;
+  color: white;
+}
+
+/* Tabella items */
+.items-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 0.75rem;
+}
+
+.items-table th,
+.items-table td {
+  padding: 0.7rem 0.5rem;
+  text-align: left;
+  font-size: 0.95rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.items-table th {
+  font-weight: 600;
+  background: #f9fafb;
+  color: #374151;
+}
+
+/* Totale */
+.order-total {
+  margin-top: 1rem;
+  font-size: 1rem;
+  color: #111827;
+}
+
+.order-total strong {
+  color: var(--header-bg);
+}
+
+/* Azioni */
+.actions {
+  margin-top: 1.25rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Bottone torna indietro */
+.btn-secondary {
+  font: inherit;
+  border-radius: 4px;
+  padding: 0.45rem 1.3rem;
+  cursor: pointer;
+  font-size: 0.95rem;
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  color: #374151;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.btn-secondary:hover {
+  background: #f3f4f6;
+}

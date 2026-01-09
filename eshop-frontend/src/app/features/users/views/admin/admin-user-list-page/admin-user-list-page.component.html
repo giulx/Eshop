@@ -1,0 +1,124 @@
+<div class="page">
+  <h1>Gestione utenti</h1>
+
+  <div class="page-card">
+    <!-- Barra di ricerca -->
+    <div class="page-actions">
+      <form class="search-form" (submit)="$event.preventDefault(); vm.onSearch()">
+        <input
+          type="text"
+          placeholder="Cerca per nome, cognome o email…"
+          [value]="vm.searchTerm()"
+          (input)="vm.setSearchTerm($any($event.target).value)"
+        />
+
+        <button type="submit">
+          Cerca
+        </button>
+
+        @if (vm.hasSearch()) {
+          <button
+            type="button"
+            class="btn-secondary"
+            (click)="vm.clearSearch()"
+          >
+            Pulisci
+          </button>
+        }
+      </form>
+    </div>
+
+    <!-- Stato -->
+    @if (vm.loading()) {
+      <p class="status">Caricamento utenti…</p>
+    }
+
+    @if (vm.error()) {
+      <p class="status status-error">{{ vm.error() }}</p>
+    }
+
+    <!-- Contenuto -->
+    @if (!vm.loading() && !vm.error()) {
+      @if (vm.users().length === 0) {
+        <div class="empty-state">
+          Nessun utente trovato.
+        </div>
+      }
+
+      @if (vm.users().length > 0) {
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nome</th>
+              <th>Email</th>
+              <th>Ruolo</th>
+              <th>Indirizzo</th>
+              <th>Città</th>
+              <th>N. civico</th>
+              <th>Azioni</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            @for (u of vm.users(); track u.id) {
+              <tr>
+                <td>{{ u.id }}</td>
+                <td>{{ u.name }} {{ u.surname }}</td>
+                <td>{{ u.email }}</td>
+                <td>
+                  <span class="badge" [class.badge-admin]="u.isAdmin">
+                    {{ vm.getRoleLabel(u) }}
+                  </span>
+                </td>
+                <td>{{ u.street || '-' }}</td>
+                <td>{{ u.city || '-' }}</td>
+                <td>{{ u.number || '-' }}</td>
+                <td>
+                  <a
+                    [routerLink]="['/admin/utenti', u.id, 'modifica']"
+                    class="link-action"
+                  >
+                    Modifica
+                  </a>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+
+        <!-- Riassunto -->
+        <p class="summary">
+          Mostrati {{ vm.users().length }} utenti su {{ vm.total() }} totali.
+        </p>
+
+        <!-- Paginazione: mostrala solo se serve -->
+        @if (vm.maxPage() > 1) {
+          <div class="pagination">
+            <button
+              type="button"
+              class="btn-secondary"
+              (click)="vm.prevPage()"
+              [disabled]="!vm.canPrev()"
+            >
+              ← Precedente
+            </button>
+
+            <span class="page-info">
+              Pagina {{ vm.page() }} / {{ vm.maxPage() }}
+            </span>
+
+            <button
+              type="button"
+              class="btn-secondary"
+              (click)="vm.nextPage()"
+              [disabled]="!vm.canNext()"
+            >
+              Successiva →
+            </button>
+          </div>
+        }
+      }
+    }
+  </div>
+</div>

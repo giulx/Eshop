@@ -1,0 +1,98 @@
+<div class="page">
+  <h1>Catalogo prodotti</h1>
+
+  <div class="page-card">
+    <div class="toolbar">
+      <div class="search-box">
+        <input
+          type="text"
+          [ngModel]="search()"
+          (ngModelChange)="search.set($event)"
+          (keyup.enter)="onSearch()"
+          placeholder="Cerca per nome o descrizione..."
+        />
+
+        <button type="button" class="btn-primary" (click)="onSearch()">
+          Cerca
+        </button>
+
+        @if (search()) {
+          <button
+            type="button"
+            class="btn-secondary btn-clear"
+            (click)="search.set(''); onSearch()"
+          >
+            Pulisci
+          </button>
+        }
+      </div>
+    </div>
+
+    @if (loading()) {
+      <p class="status">Caricamento prodotti...</p>
+    }
+
+    @if (error()) {
+      <p class="status status-error">{{ error() }}</p>
+    }
+
+    @if (!loading() && !error()) {
+      @if (products().length === 0) {
+        <div class="empty-state">Nessun prodotto trovato.</div>
+      }
+
+      @if (products().length > 0) {
+        <div class="product-list">
+          @for (p of products(); track p.id) {
+            <article class="product-item">
+              <h3 class="product-title">
+                <a [routerLink]="['/prodotti', p.id]">
+                  {{ p.name }}
+                </a>
+              </h3>
+
+              <p class="product-description">
+                {{ p.description }}
+              </p>
+
+              <div class="product-meta">
+                <span class="product-price">
+                  {{ p.price | currency:p.currency }}
+                </span>
+                <span class="product-stock">
+                  Disponibili: {{ p.availableQuantity }}
+                </span>
+              </div>
+            </article>
+          }
+        </div>
+
+        <p class="summary">
+          Mostrati {{ products().length }} prodotti su {{ total() }} totali.
+        </p>
+
+        <div class="pagination">
+          <button
+            type="button"
+            class="btn-secondary"
+            (click)="page() > 1 && changePage(page() - 1)"
+            [disabled]="page() === 1"
+          >
+            ← Precedente
+          </button>
+
+          <span class="page-info">Pagina {{ page() }}</span>
+
+          <button
+            type="button"
+            class="btn-secondary"
+            (click)="page() * pageSize() < total() && changePage(page() + 1)"
+            [disabled]="page() * pageSize() >= total()"
+          >
+            Successiva →
+          </button>
+        </div>
+      }
+    }
+  </div>
+</div>

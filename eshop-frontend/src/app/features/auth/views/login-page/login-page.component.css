@@ -1,0 +1,145 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background: #f3f4f6;
+  padding: 2rem 1rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* Layout */
+.page {
+  max-width: 400px;
+  margin: 0 auto;
+  animation: fadeIn 0.25s ease-out;
+}
+
+h1 {
+  margin-bottom: 1rem;
+  color: var(--header-bg);
+  font-size: 1.4rem;
+  text-align: center;
+}
+
+/* Card */
+.form-card {
+  background: #ffffff;
+  border-radius: 6px;
+  padding: 1.75rem;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.08);
+  border: 1px solid rgba(11, 37, 69, 0.05);
+  backdrop-filter: blur(2px);
+}
+
+/* Campi */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 1rem;
+}
+
+label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+input {
+  font: inherit;
+  padding: 0.5rem 0.65rem;
+  border-radius: 4px;
+  border: 1px solid #d1d5db;
+  background: #f9fafb;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--header-bg);
+  box-shadow: 0 0 0 2px rgba(11, 37, 69, 0.18);
+  background: #ffffff;
+}
+
+/* 🔹 Messaggi "globali" */
+.status {
+  margin: 0.3rem 0 0.8rem;
+  font-size: 0.9rem;
+  color: #4b5563;
+}
+
+.status-error {
+  color: #B12704 !important;
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-weight: 600;
+}
+
+
+/* 🔹 Messaggi di errore sotto i campi (local field errors) */
+.error-msg {
+  color: #B12704;
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin-top: -0.1rem;
+}
+
+/* (opzionale ma utile) campo con errore più evidente */
+input.ng-invalid.ng-touched {
+  border-color: #B12704;
+  background: #FEF2F2;
+}
+
+/* Submit */
+button[type="submit"] {
+  font: inherit;
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid var(--header-bg);
+  padding: 0.55rem 1.2rem;
+  background: var(--header-bg);
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.05s ease;
+}
+
+button[type="submit"]:hover:not(:disabled) {
+  background: var(--header-bg-hover);
+}
+
+button[type="submit"]:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+button[type="submit"]:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Link Registrazione */
+.register-hint {
+  margin-top: 1.2rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #4b5563;
+}
+
+.register-hint a {
+  font-weight: 600;
+  color: var(--header-bg);
+  text-decoration: none;
+  transition: opacity 0.15s ease, text-decoration-color 0.15s ease;
+}
+
+.register-hint a:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
+/* Animazione ingresso */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

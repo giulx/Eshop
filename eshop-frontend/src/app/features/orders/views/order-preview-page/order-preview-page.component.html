@@ -1,0 +1,155 @@
+<div class="page preview-page">
+  <h1>Riepilogo ordine</h1>
+
+  <div class="preview-card">
+    <div class="status-box">
+      @if (vm.loading) {
+        <p class="info">Generazione preview...</p>
+      }
+
+      @if (vm.error) {
+        <p class="error">{{ vm.error }}</p>
+      }
+
+      @if (vm.confirmError) {
+        <p class="error">{{ vm.confirmError }}</p>
+      }
+
+      @if (vm.paymentError) {
+        <p class="error">{{ vm.paymentError }}</p>
+      }
+
+      @if (vm.confirmSuccess) {
+        <p class="ok">{{ vm.confirmSuccess }}</p>
+      }
+    </div>
+
+    @if (!vm.loading && !vm.error) {
+      @if (vm.preview; as preview) {
+
+        <!-- VALID ROWS -->
+        <section class="section">
+          <h2>Articoli inclusi nell’ordine</h2>
+
+          @if (preview.validRows.length > 0) {
+            <table>
+              <thead>
+                <tr>
+                  <th>Prodotto</th>
+                  <th>Q.tà</th>
+                  <th>Prezzo</th>
+                  <th>Subtotale</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                @for (row of preview.validRows; track row.productId) {
+                  <tr>
+                    <td>{{ row.name }}</td>
+                    <td>{{ row.quantity }}</td>
+                    <td>{{ row.unitPrice | number:'1.2-2' }} €</td>
+                    <td>
+                      <strong>{{ row.subtotal | number:'1.2-2' }} €</strong>
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          } @else {
+            <p class="no-items">
+              Nessun articolo disponibile per l’ordine.
+            </p>
+          }
+
+          <div class="total-box">
+            <span>Totale ordine</span>
+            <strong>{{ preview.total | number:'1.2-2' }} €</strong>
+          </div>
+        </section>
+
+        <!-- DISCARDED ROWS -->
+        @if (preview.discardedRows.length > 0) {
+          <section class="section discarded">
+            <h2>Articoli non disponibili</h2>
+
+            <table>
+              <thead>
+                <tr>
+                  <th>Prodotto</th>
+                  <th>Motivo</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                @for (row of preview.discardedRows; track row.productId) {
+                  <tr>
+                    <td>{{ row.name }}</td>
+                    <td>{{ row.reason }}</td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </section>
+        }
+
+        <!-- PAYMENT -->
+        <section class="section payment-box">
+          <h2>Dati pagamento</h2>
+
+          <div class="form-grid">
+            <div>
+              <label>Titolare carta</label>
+              <input type="text" [(ngModel)]="vm.payment.cardHolder">
+            </div>
+
+            <div>
+              <label>Numero carta</label>
+              <input
+                placeholder="0000 0000 0000 0000"
+                [(ngModel)]="vm.payment.cardNumber"
+              >
+            </div>
+
+            <div class="flex">
+              <div>
+                <label>MM</label>
+                <input type="text" maxlength="2" [(ngModel)]="vm.payment.expiryMonth">
+              </div>
+
+              <div>
+                <label>YY</label>
+                <input type="text" maxlength="2" [(ngModel)]="vm.payment.expiryYear">
+              </div>
+
+              <div>
+                <label>CVC</label>
+                <input type="text" maxlength="3" [(ngModel)]="vm.payment.cvc">
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- AZIONI -->
+        <div class="actions">
+          <button class="btn-secondary" (click)="vm.backToCart()">
+            Torna al carrello
+          </button>
+
+          <button
+            class="btn-primary"
+            [disabled]="vm.confirming || preview.validRows.length === 0"
+            (click)="vm.confirm()"
+          >
+            {{ vm.confirming ? 'Conferma...' : 'Conferma ordine' }}
+          </button>
+        </div>
+
+      } @else {
+        <p>Nessun riepilogo disponibile.</p>
+        <button class="btn-secondary" (click)="vm.backToCart()">
+          Torna al carrello
+        </button>
+      }
+    }
+  </div>
+</div>

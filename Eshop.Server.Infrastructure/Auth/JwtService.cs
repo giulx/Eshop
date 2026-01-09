@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using Eshop.Server.Application.Interfacce;
-using Eshop.Server.Domain.Modelli;
+using Eshop.Server.Application.Interfaces;
+using Eshop.Server.Domain.Entities;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
@@ -19,7 +19,7 @@ namespace Eshop.Server.Infrastructure.Auth
             _config = config;
         }
 
-        public string GeneraToken(Utente utente)
+        public string GenerateToken(User user)
         {
             var key = _config["Jwt:Key"] ?? throw new Exception("Jwt:Key mancante");
             var issuer = _config["Jwt:Issuer"];
@@ -32,18 +32,18 @@ namespace Eshop.Server.Infrastructure.Auth
             var claims = new List<Claim>
             {
                 // Identità
-                new Claim("id", utente.Id.ToString()),
-                new Claim(JwtRegisteredClaimNames.Sub, utente.Id.ToString()),
-                new Claim(ClaimTypes.NameIdentifier, utente.Id.ToString()),
+                new Claim("id", user.Id.ToString()),
+                new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
 
-                // Dati utente
-                new Claim(JwtRegisteredClaimNames.Email, utente.Email.Valore),
-                new Claim("name", $"{utente.Nome} {utente.Cognome}"),
+                // Dati user
+                new Claim(JwtRegisteredClaimNames.Email, user.Email.Value),
+                new Claim("name", $"{user.Name} {user.Surname}"),
 
                 // Autorizzazione
-                new Claim("is_admin", utente.IsAdmin.ToString().ToLowerInvariant())
+                new Claim("is_admin", user.IsAdmin.ToString().ToLowerInvariant())
                 // Se in futuro vuoi usare [Authorize(Roles="Admin")], aggiungi:
-                // new Claim(ClaimTypes.Role, utente.IsAdmin ? "Admin" : "Cliente")
+                // new Claim(ClaimTypes.Role, user.IsAdmin ? "Admin" : "Customer")
             };
 
             var token = new JwtSecurityToken(

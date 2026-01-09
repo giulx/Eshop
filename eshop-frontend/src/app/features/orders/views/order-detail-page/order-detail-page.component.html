@@ -1,0 +1,81 @@
+<div class="page">
+  <h1>Dettaglio ordine</h1>
+
+  <div class="page-card">
+    <div class="status-messages">
+      @if (vm.loading) {
+        <p class="status">Caricamento ordine...</p>
+      }
+
+      @if (vm.error) {
+        <p class="status status-error">{{ vm.error }}</p>
+      }
+    </div>
+
+    @if (!vm.loading && !vm.error) {
+      @if (vm.order; as order) {
+        <div class="order-header">
+          <div>
+            <div class="order-id">Ordine #{{ order.id }}</div>
+            <div class="order-date">
+              del {{ order.creationDate | date:'dd/MM/yyyy HH:mm' }}
+            </div>
+          </div>
+
+          <div class="order-status">
+            <span
+              class="badge"
+              [class.badge-paid]="order.status === 0"
+              [class.badge-processing]="order.status === 1"
+              [class.badge-shipped]="order.status === 2"
+              [class.badge-cancelled]="order.status === 3"
+            >
+              {{ vm.getStatusLabel(order.status) }}
+            </span>
+          </div>
+        </div>
+
+        <h2>Articoli ordinati</h2>
+
+        @if (order.items.length > 0) {
+          <table class="items-table">
+            <thead>
+              <tr>
+                <th>Prodotto</th>
+                <th>Prezzo unitario</th>
+                <th>Quantità</th>
+                <th>Subtotale</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              @for (item of order.items; track item.productId) {
+                <tr>
+                  <td>{{ item.name }}</td>
+                  <td>{{ item.unitPrice | number:'1.2-2' }} EUR</td>
+                  <td>{{ item.quantity }}</td>
+                  <td>{{ item.subtotal | number:'1.2-2' }} EUR</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        } @else {
+          <p class="status">Nessun articolo associato all’ordine.</p>
+        }
+
+        <p class="order-total">
+          Totale ordine:
+          <strong>{{ order.total | number:'1.2-2' }} EUR</strong>
+        </p>
+
+        <div class="actions">
+          <button type="button" class="btn-secondary" (click)="vm.backToOrders()">
+            Torna ai miei ordini
+          </button>
+        </div>
+      } @else {
+        <p class="status">Nessun ordine da mostrare.</p>
+      }
+    }
+  </div>
+</div>

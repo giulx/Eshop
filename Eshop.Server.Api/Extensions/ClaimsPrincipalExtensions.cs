@@ -5,7 +5,7 @@ namespace Eshop.Server.Api.Extensions
     public static class ClaimsPrincipalExtensions
     {
         /// <summary>
-        /// Estensione per ottenere l'ID utente (claim "id") dal token JWT.
+        /// Estensione per ottenere l'ID user (claim "id") dal token JWT.
         /// </summary>
         public static int? GetUserId(this ClaimsPrincipal user)
         {

@@ -1,0 +1,199 @@
+<div class="page">
+  <h1>Gestione ordini</h1>
+
+  <div class="page-card">
+    <div class="status-messages">
+      @if (vm.loading) {
+        <p class="status">Caricamento ordini...</p>
+      }
+
+      @if (vm.error) {
+        <p class="status status-error">{{ vm.error }}</p>
+      }
+
+      @if (vm.success) {
+        <p class="status status-success">{{ vm.success }}</p>
+      }
+    </div>
+
+    @if (!vm.loading && vm.orders.length > 0) {
+      <section class="filters-bar">
+        <div class="filters-bar-left">
+          <h2>Filtri ordini</h2>
+          <p>
+            Cerca rapidamente un ordine per numero o cliente
+            e restringi per stato.
+          </p>
+
+          <p class="filters-counter">
+            {{ vm.filteredOrders.length }} ordini trovati
+            @if (vm.filteredOrders.length !== vm.orders.length) {
+              <span>su {{ vm.orders.length }} totali</span>
+            }
+          </p>
+        </div>
+
+        <div class="filters-bar-right">
+          <div class="filter-group">
+            <label for="search-mode">Cerca per</label>
+            <select
+              id="search-mode"
+              [value]="vm.searchMode"
+              (change)="vm.updateSearchMode($any($event.target).value)"
+            >
+              <option value="orderId">Numero ordine</option>
+              <option value="customerId">ID cliente</option>
+            </select>
+          </div>
+
+          <div class="filter-group filter-group--search">
+            <label for="search-text">
+              @switch (vm.searchMode) {
+                @case ('orderId') { Numero ordine }
+                @case ('customerId') { ID cliente }
+              }
+            </label>
+
+            <div class="search-input-wrapper">
+              <span class="search-icon">🔍</span>
+              <input
+                id="search-text"
+                type="text"
+                [placeholder]="vm.searchMode === 'orderId' ? 'Es. 101, 202…' : 'Es. 1, 23…'"
+                [value]="vm.searchText"
+                (input)="vm.updateSearchText($any($event.target).value)"
+              />
+            </div>
+          </div>
+
+          <div class="filter-group">
+            <label for="status-filter">Stato</label>
+            <select
+              id="status-filter"
+              [value]="vm.statusFilter"
+              (change)="vm.updateStatusFilter($any($event.target).value)"
+            >
+              <option value="all">Tutti</option>
+              <option value="0">Pagato</option>
+              <option value="1">In elaborazione</option>
+              <option value="2">Spedito</option>
+              <option value="3">Annullato</option>
+            </select>
+          </div>
+
+          <div class="filter-group filter-actions">
+            <label>&nbsp;</label>
+            <button
+              type="button"
+              class="btn-small btn-outline"
+              (click)="vm.clearFilters()"
+            >
+              Pulisci filtri
+            </button>
+          </div>
+        </div>
+      </section>
+    }
+
+    @if (!vm.loading && !vm.error) {
+      @if (vm.orders.length === 0) {
+        <div class="empty-state">
+          <p>Nessun ordine presente.</p>
+        </div>
+      }
+
+      @if (vm.orders.length > 0 && vm.filteredOrders.length === 0) {
+        <div class="empty-state">
+          <p>
+            Nessun ordine trovato con questi filtri.
+            <button type="button" class="link-button" (click)="vm.clearFilters()">
+              Rimuovi filtri
+            </button>
+          </p>
+        </div>
+      }
+
+      @if (vm.filteredOrders.length > 0) {
+        <table class="orders-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>ID cliente</th>
+              <th>Data</th>
+              <th>Stato</th>
+              <th>Totale</th>
+              <th>Azioni</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            @for (order of vm.filteredOrders; track order.id) {
+              <tr>
+                <td>#{{ order.id }}</td>
+                <td>{{ order.customerId }}</td>
+
+                <td>
+                  {{ order.creationDate | date:'dd/MM/yyyy HH:mm' }}
+                </td>
+
+                <td>
+                  <span
+                    class="badge"
+                    [class.badge-paid]="order.status === 0"
+                    [class.badge-processing]="order.status === 1"
+                    [class.badge-shipped]="order.status === 2"
+                    [class.badge-cancelled]="order.status === 3"
+                  >
+                    {{ vm.getStatusLabel(order.status) }}
+                  </span>
+                </td>
+
+                <td>
+                  {{ order.total | number:'1.2-2' }} EUR
+                </td>
+
+                <td class="actions">
+                  <button
+                    type="button"
+                    class="btn-small"
+                    (click)="vm.markAsProcessing(order)"
+                    [disabled]="vm.isWorkingOn(order) || !vm.canMarkAsProcessing(order)"
+                  >
+                    In elaborazione
+                  </button>
+
+                  <button
+                    type="button"
+                    class="btn-small"
+                    (click)="vm.markAsShipped(order)"
+                    [disabled]="vm.isWorkingOn(order) || !vm.canMarkAsShipped(order)"
+                  >
+                    Spedito
+                  </button>
+
+                  <button
+                    type="button"
+                    class="btn-small btn-danger"
+                    (click)="vm.cancelOrder(order)"
+                    [disabled]="vm.isWorkingOn(order) || !vm.canCancel(order)"
+                  >
+                    Annulla
+                  </button>
+
+                  <button
+                    type="button"
+                    class="btn-small btn-outline"
+                    (click)="vm.deleteHard(order)"
+                    [disabled]="vm.isWorkingOn(order)"
+                  >
+                    Elimina def.
+                  </button>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      }
+    }
+  </div>
+</div>

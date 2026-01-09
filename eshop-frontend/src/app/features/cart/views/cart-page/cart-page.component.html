@@ -1,0 +1,113 @@
+<div class="page">
+  <h1>Il mio carrello</h1>
+
+  <div class="page-card">
+    <div class="status-messages">
+      @if (vm.loading) {
+        <p class="status">Caricamento carrello...</p>
+      }
+
+      @if (vm.error) {
+        <p class="status status-error">{{ vm.error }}</p>
+      }
+
+      @if (vm.success) {
+        <p class="status status-success">{{ vm.success }}</p>
+      }
+    </div>
+
+    @if (!vm.loading) {
+      @if (!vm.hasItems()) {
+        <div class="empty-state">
+          <p>Il tuo carrello è vuoto.</p>
+          <a routerLink="/prodotti" class="link">Torna al catalogo</a>
+        </div>
+      }
+
+      @if (vm.hasItems()) {
+        <div class="cart-content">
+          <table class="cart-table">
+            <thead>
+              <tr>
+                <th>Prodotto</th>
+                <th>Prezzo unitario</th>
+                <th>Quantità</th>
+                <th>Subtotale</th>
+                <th></th>
+              </tr>
+            </thead>
+
+            <tbody>
+              @for (item of (vm.cart?.items ?? []); track item.productId) {
+                <tr>
+                  <td class="col-name">
+                    {{ item.name }}
+                  </td>
+
+                  <td class="col-price">
+                    {{ item.unitPriceSnapshot.value | number:'1.2-2' }}
+                    {{ item.unitPriceSnapshot.currency }}
+                  </td>
+
+                  <td class="col-quantity">
+                    <div class="qty-control">
+                      <button
+                        type="button"
+                        (click)="vm.decreaseQuantity(item)"
+                        [disabled]="vm.updating"
+                      >
+                        −
+                      </button>
+
+                      <span>{{ item.quantity }}</span>
+
+                      <button
+                        type="button"
+                        (click)="vm.increaseQuantity(item)"
+                        [disabled]="vm.updating"
+                      >
+                        +
+                      </button>
+                    </div>
+                  </td>
+
+                  <td class="col-subtotal">
+                    {{ item.subtotal.value | number:'1.2-2' }}
+                    {{ item.subtotal.currency }}
+                  </td>
+
+                  <td class="col-actions">
+                    <button
+                      type="button"
+                      class="btn-remove"
+                      (click)="vm.removeItem(item)"
+                      [disabled]="vm.updating"
+                    >
+                      Rimuovi
+                    </button>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+
+          <div class="cart-summary">
+            <div class="total">
+              <span>Totale:</span>
+              <strong>{{ vm.getTotalFormatted() }}</strong>
+            </div>
+
+            <button
+              type="button"
+              class="btn-checkout"
+              (click)="vm.proceedToCheckout()"
+              [disabled]="vm.updating || !vm.hasItems()"
+            >
+              Vai alla preview ordine
+            </button>
+          </div>
+        </div>
+      }
+    }
+  </div>
+</div>

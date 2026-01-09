@@ -1,0 +1,358 @@
+/* ================================
+   DESIGN TOKENS (tesi-friendly)
+   Tema: Verde Petrolio / “Vertigo”
+   Note: palette coerente + accessibilità + riuso tokens
+================================ */
+:host {
+  /* Base */
+  --bg: #f3f4f6;
+  --surface: #ffffff;
+  --text: #0f172a;               /* slate-900 */
+  --muted: #475569;              /* slate-600 */
+
+  /* Header / Brand */
+  --header-bg: #0f3d3e;          /* verde petrolio */
+  --header-bg-2: #0b2f30;        /* variante più scura (nav/ombre) */
+  --text-on-header: rgba(236, 253, 245, 0.92);
+  --text-on-header-strong: #ecfdf5;
+
+  /* Accent (Vertigo green) */
+  --accent: #2f9e8f;             /* verde “Vertigo” */
+  --accent-hover: #3fb6a6;
+  --accent-press: #2a8b7e;
+  --accent-border: rgba(47, 158, 143, 0.55);
+
+  /* Neutrals / Borders */
+  --border: rgba(15, 23, 42, 0.12);
+  --border-strong: rgba(15, 23, 42, 0.18);
+
+  /* Shadows */
+  --shadow-header: 0 10px 24px rgba(2, 44, 34, 0.35);
+  --shadow-float: 0 10px 18px rgba(2, 44, 34, 0.22);
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-pill: 999px;
+
+  display: block;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* ================================
+   STRUTTURA BASE
+================================ */
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+}
+
+/* ================================
+   HEADER / NAVBAR
+================================ */
+.app-header {
+  background: linear-gradient(180deg, var(--header-bg), var(--header-bg-2));
+  color: var(--text-on-header-strong);
+  padding: 0.8rem 1.5rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+
+  box-shadow: var(--shadow-header);
+}
+
+/* ================================
+   LOGO
+================================ */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo-img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  filter: brightness(1.08) contrast(1.12);
+}
+
+.brand {
+  font-weight: 760;
+  font-size: 1.15rem;
+  letter-spacing: 0.45px;
+  color: var(--text-on-header-strong);
+}
+
+/* ================================
+   NAV (centro)
+================================ */
+.app-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.15rem;
+  flex: 1;
+}
+
+/* Link navbar */
+.app-nav a {
+  color: var(--text-on-header);
+  text-decoration: none;
+  font-size: 0.95rem;
+
+  padding: 0.2rem 0;
+  border-bottom: 2px solid transparent;
+
+  transition:
+    border-color 0.15s ease,
+    color 0.15s ease,
+    opacity 0.15s ease,
+    transform 0.08s ease;
+}
+
+.app-nav a:hover {
+  border-bottom-color: rgba(63, 182, 166, 0.85);
+  color: var(--text-on-header-strong);
+  opacity: 0.96;
+  transform: translateY(-1px);
+}
+
+.app-nav a.active {
+  font-weight: 650;
+  border-bottom-color: var(--accent);
+  color: var(--accent);
+}
+
+/* Focus accessibile (tastiera) */
+.app-nav a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+/* ================================
+   MAIN
+================================ */
+.app-main {
+  flex: 1;
+  padding: 1.5rem;
+}
+
+/* ================================
+   USER AREA (destra)
+================================ */
+.user-area {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  white-space: nowrap;
+}
+
+.user-name {
+  font-size: 0.9rem;
+  margin-right: 0.25rem;
+  color: var(--text-on-header);
+}
+
+.user-link {
+  font-size: 0.9rem;
+  color: var(--text-on-header);
+  text-decoration: none;
+}
+
+.user-link:hover {
+  text-decoration: underline;
+}
+
+.user-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+/* ================================
+   GUEST LINKS (Accedi / Registrati)
+================================ */
+.guest-links {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+/* Accedi (outline chiaro) */
+.btn-login-nav {
+  font-size: 0.9rem;
+  font-weight: 550;
+
+  color: var(--text-on-header);
+  text-decoration: none;
+
+  padding: 0.42rem 1.05rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(236, 253, 245, 0.55);
+  background: transparent;
+
+  cursor: pointer;
+  transition:
+    background 0.18s ease,
+    color 0.18s ease,
+    border-color 0.18s ease,
+    box-shadow 0.18s ease,
+    transform 0.08s ease;
+}
+
+.btn-login-nav:hover {
+  background: rgba(236, 253, 245, 0.95);
+  color: var(--header-bg);
+  border-color: rgba(236, 253, 245, 0.95);
+  box-shadow: 0 6px 14px rgba(2, 44, 34, 0.25);
+  transform: translateY(-1px);
+}
+
+.btn-login-nav:active {
+  transform: translateY(0);
+}
+
+.btn-login-nav:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Registrati (CTA “Vertigo”) */
+.btn-register-nav {
+  font-size: 0.9rem;
+  font-weight: 680;
+
+  padding: 0.46rem 1.15rem;
+  border-radius: var(--radius-pill);
+
+  background: var(--accent);
+  color: #062c2b;
+  border: 1px solid var(--accent-border);
+
+  text-decoration: none;
+  cursor: pointer;
+
+  box-shadow: var(--shadow-float);
+
+  transition:
+    background 0.18s ease,
+    border-color 0.18s ease,
+    box-shadow 0.18s ease,
+    transform 0.08s ease;
+}
+
+.btn-register-nav:hover {
+  background: var(--accent-hover);
+  border-color: rgba(63, 182, 166, 0.7);
+  box-shadow: 0 14px 26px rgba(2, 44, 34, 0.30);
+  transform: translateY(-1px);
+}
+
+.btn-register-nav:active {
+  background: var(--accent-press);
+  transform: translateY(0);
+}
+
+.btn-register-nav:focus-visible {
+  outline: 2px solid var(--text-on-header-strong);
+  outline-offset: 3px;
+}
+
+/* ================================
+   LOGOUT BUTTON
+================================ */
+.user-area button[type="button"] {
+  font: inherit;
+  padding: 0.32rem 0.95rem;
+
+  background: transparent;
+  color: var(--text-on-header);
+  border: 1px solid rgba(236, 253, 245, 0.55);
+
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 0.85rem;
+
+  transition:
+    background 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.05s ease,
+    box-shadow 0.18s ease;
+}
+
+.user-area button[type="button"]:hover:not(:disabled) {
+  background: rgba(236, 253, 245, 0.95);
+  color: var(--header-bg);
+  border-color: rgba(236, 253, 245, 0.95);
+  box-shadow: 0 6px 14px rgba(2, 44, 34, 0.22);
+  transform: translateY(-1px);
+}
+
+.user-area button[type="button"]:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.user-area button[type="button"]:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.user-area button[type="button"]:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ================================
+   RESPONSIVE
+================================ */
+@media (max-width: 768px) {
+  .app-header {
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+  .app-nav {
+    order: 3;
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 0.75rem 1rem;
+  }
+
+  .user-area {
+    order: 2;
+    margin-left: auto;
+  }
+
+  .guest-links {
+    gap: 0.5rem;
+  }
+
+  .btn-login-nav,
+  .btn-register-nav {
+    padding-inline: 0.85rem;
+  }
+
+  .app-main {
+    padding: 1rem;
+  }
+}
+
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+}
+
+
+
+
+

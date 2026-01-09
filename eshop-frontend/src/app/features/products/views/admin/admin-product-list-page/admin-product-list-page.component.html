@@ -1,0 +1,102 @@
+<h1>Gestione prodotti (Admin)</h1>
+
+<div class="page-card">
+  <div class="page-actions">
+    <button type="button" class="primary" (click)="goToCreate()">
+      + Nuovo prodotto
+    </button>
+  </div>
+
+  @if (vm.loading$ | async) {
+    <p>Caricamento prodotti...</p>
+  }
+
+  @if (vm.error$ | async; as error) {
+    <p class="status-error">{{ error }}</p>
+  }
+
+  @if (!(vm.loading$ | async) && (vm.products$ | async); as products) {
+    @if (products.length > 0) {
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Prezzo</th>
+            <th>Disponibili</th>
+            <th>Azioni</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          @for (p of products; track p.id) {
+            <tr>
+              <td>{{ p.id }}</td>
+              <td>{{ p.name }}</td>
+              <td>{{ p.price | currency:p.currency }}</td>
+              <td>{{ p.availableQuantity }}</td>
+              <td>
+                <button
+                  type="button"
+                  class="secondary"
+                  (click)="goToEdit(p.id)"
+                >
+                  Modifica
+                </button>
+
+                <button
+                  type="button"
+                  class="danger"
+                  (click)="openDeleteModal(p.id)"
+                  [disabled]="vm.loading$ | async"
+                >
+                  Elimina
+                </button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    } @else {
+      <div class="empty-state">
+        Nessun prodotto presente.
+      </div>
+    }
+  }
+</div>
+
+@if (isDeleteModalOpen) {
+  <div class="modal-backdrop" (click)="closeDeleteModal()"></div>
+
+  <div
+    class="modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="delete-modal-title"
+  >
+    <h2 id="delete-modal-title">Conferma eliminazione</h2>
+
+    <p>
+      Vuoi davvero eliminare il prodotto
+      <strong>#{{ productIdToDelete }}</strong>?
+    </p>
+
+    <div class="modal-actions">
+      <button
+        type="button"
+        class="secondary"
+        (click)="closeDeleteModal()"
+      >
+        Annulla
+      </button>
+
+      <button
+        type="button"
+        class="danger"
+        (click)="confirmDelete()"
+      >
+        Elimina
+      </button>
+    </div>
+  </div>
+}

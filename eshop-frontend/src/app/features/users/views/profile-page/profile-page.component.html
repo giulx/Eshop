@@ -1,0 +1,179 @@
+<div class="page">
+  <h1>Il mio profilo</h1>
+
+  <div class="form-card">
+    <div class="status-messages">
+      @if (vm.loading()) {
+        <p class="status">Caricamento dati profilo...</p>
+      }
+
+      @if (vm.error()) {
+        <p class="status status-error">{{ vm.error() }}</p>
+      }
+
+      @if (vm.success()) {
+        <p class="status status-success">{{ vm.success() }}</p>
+      }
+    </div>
+
+    @if (!vm.loading()) {
+      <form (submit)="$event.preventDefault(); vm.onSubmit()">
+        <!-- Email (readonly) -->
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" type="email" [value]="vm.email()" readonly />
+        </div>
+
+        <!-- Nome -->
+        @let name = vm.formModel().name;
+        @let nameInvalid = name.trim().length === 0;
+
+        <div class="field">
+          <label for="name">Nome</label>
+          <input
+            id="name"
+            type="text"
+            maxlength="50"
+            autocomplete="given-name"
+            [value]="name"
+            (input)="vm.setField('name', $any($event.target).value)"
+            [class.invalid]="nameInvalid"
+            aria-describedby="nameHelp"
+          />
+          <p id="nameHelp" class="hint" [class.hint-error]="nameInvalid">
+            @if (nameInvalid) { Il nome è obbligatorio. } @else { Ok. }
+          </p>
+        </div>
+
+        <!-- Cognome -->
+        @let surname = vm.formModel().surname;
+        @let surnameInvalid = surname.trim().length === 0;
+
+        <div class="field">
+          <label for="surname">Cognome</label>
+          <input
+            id="surname"
+            type="text"
+            maxlength="50"
+            autocomplete="family-name"
+            [value]="surname"
+            (input)="vm.setField('surname', $any($event.target).value)"
+            [class.invalid]="surnameInvalid"
+            aria-describedby="surnameHelp"
+          />
+          <p id="surnameHelp" class="hint" [class.hint-error]="surnameInvalid">
+            @if (surnameInvalid) { Il cognome è obbligatorio. } @else { Ok. }
+          </p>
+        </div>
+
+        <!-- Indirizzo -->
+        <div class="field">
+          <label for="street">Indirizzo</label>
+          <input
+            id="street"
+            type="text"
+            maxlength="200"
+            autocomplete="address-line1"
+            [value]="vm.formModel().street"
+            (input)="vm.setField('street', $any($event.target).value)"
+          />
+        </div>
+
+        <!-- Città -->
+        <div class="field">
+          <label for="city">Città</label>
+          <input
+            id="city"
+            type="text"
+            maxlength="200"
+            autocomplete="address-level2"
+            [value]="vm.formModel().city"
+            (input)="vm.setField('city', $any($event.target).value)"
+          />
+        </div>
+
+        <!-- CAP -->
+        @let postalCode = vm.formModel().postalCode;
+        @let postalTrim = postalCode.trim();
+        @let postalInvalid = postalTrim.length > 0 && !postalTrim.match('^[0-9]+$');
+
+        <div class="field">
+          <label for="postalCode">CAP</label>
+          <input
+            id="postalCode"
+            type="text"
+            maxlength="10"
+            inputmode="numeric"
+            autocomplete="postal-code"
+            [value]="postalCode"
+            (input)="vm.setField('postalCode', $any($event.target).value)"
+            [class.invalid]="postalInvalid"
+            aria-describedby="capHelp"
+          />
+          <p id="capHelp" class="hint" [class.hint-error]="postalInvalid">
+            @if (postalInvalid) { Il CAP deve contenere solo cifre. }
+          </p>
+        </div>
+
+        <!-- Numero civico -->
+        <div class="field">
+          <label for="number">Numero civico</label>
+          <input
+            id="number"
+            type="text"
+            maxlength="20"
+            autocomplete="address-line2"
+            [value]="vm.formModel().number"
+            (input)="vm.setField('number', $any($event.target).value)"
+          />
+        </div>
+
+        <!-- Nuova password -->
+        @let nuovaPassword = vm.formModel().nuovaPassword;
+        @let pwdTrim = nuovaPassword.trim();
+        @let pwdInvalid = pwdTrim.length > 0 && pwdTrim.length < 8;
+
+        <div class="field">
+          <label for="nuovaPassword">Nuova password</label>
+          <input
+            id="nuovaPassword"
+            type="password"
+            minlength="8"
+            maxlength="100"
+            autocomplete="new-password"
+            placeholder="Lascia vuoto per non cambiare"
+            [value]="nuovaPassword"
+            (input)="vm.setField('nuovaPassword', $any($event.target).value)"
+            [class.invalid]="pwdInvalid"
+            aria-describedby="pwdHelp"
+          />
+          <p id="pwdHelp" class="hint" [class.hint-error]="pwdInvalid">
+            @if (pwdInvalid) { Minimo 8 caratteri. }
+          </p>
+        </div>
+
+        <!-- Avviso generale (quando non inviabile) -->
+        @if (!vm.canSubmit() && vm.hasChanges()) {
+          <p class="status status-error">
+            Controlla i campi evidenziati prima di salvare.
+          </p>
+        }
+
+        <div class="actions">
+          <button type="submit" [disabled]="!vm.canSubmit()">
+            {{ vm.saving() ? 'Salvataggio...' : 'Salva modifiche' }}
+          </button>
+
+          <button
+            type="button"
+            class="danger"
+            (click)="vm.onDeleteAccount()"
+            [disabled]="vm.deleting() || !vm.canDelete()"
+          >
+            {{ vm.deleting() ? 'Eliminazione...' : 'Elimina account' }}
+          </button>
+        </div>
+      </form>
+    }
+  </div>
+</div>
