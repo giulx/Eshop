@@ -1,99 +1,123 @@
-# Eshop Frontend
+# Eshop – Web E-commerce Application
 
-Questo modulo implementa il **livello di presentazione (Presentation Tier)** del sistema e-commerce sviluppato come progetto di tesi.
+Questo repository contiene un **sistema e-commerce web** sviluppato come **progetto di tesi**, progettato secondo un’architettura **multi-tier** con una netta separazione delle responsabilità tra i diversi livelli applicativi.
 
-Si tratta di una **single-page web application** realizzata con **Angular**, progettata per interagire esclusivamente con il backend tramite **API REST**, senza includere logica di business o accesso diretto ai dati.
-
-Il frontend è concepito come componente **indipendente e sostituibile**, in linea con i principi di un’architettura **multi-tier**.
+L’obiettivo del progetto è la realizzazione di un sistema distribuito coerente, manutenibile ed estendibile, applicando principi di **ingegneria del software**, **clean architecture** e **architettura a livelli**.
 
 ---
 
-## Contesto architetturale
+## Panoramica del sistema
 
-Nel sistema complessivo:
+Il sistema è composto da due macro-componenti **indipendenti**:
 
-- il **frontend** gestisce l’interazione con l’utente e la presentazione dei dati
-- il **backend** espone le funzionalità applicative e la logica di dominio
-- la comunicazione avviene tramite richieste HTTP verso endpoint REST
+- **Frontend**  
+  Single-page web application responsabile della presentazione dei dati e dell’interazione con l’utente.
 
-Questa separazione consente l’evoluzione indipendente dei componenti e favorisce scalabilità e manutenibilità.
+- **Backend**  
+  Sistema server-side strutturato in più livelli (API, Application, Domain, Infrastructure) che implementa la logica applicativa, il dominio e la persistenza dei dati.
+
+La comunicazione tra frontend e backend avviene **esclusivamente tramite API REST** su protocollo HTTP.
+
+---
+
+## Architettura
+
+L’architettura complessiva segue un modello **multi-tier**, in cui ogni livello ha responsabilità ben definite e non accede direttamente ai livelli inferiori.
+
+Schema concettuale:
+
+```text
+[ Browser ]
+     |
+     | HTTP / REST
+     v
+[ Frontend (Angular) ]
+     |
+     | HTTP / REST
+     v
+[ Backend API ]
+     |
+     v
+[ Application Layer ]
+     |
+     v
+[ Domain Layer ]
+     |
+     v
+[ Infrastructure / Database ]
+```
+
+Questa organizzazione consente:
+- isolamento della logica di dominio
+- maggiore testabilità
+- riduzione dell’accoppiamento tra componenti
+- evoluzione indipendente dei livelli
+
+---
+
+## Struttura del repository
+
+```text
+.
+├─ Eshop.Backend/        # Backend (API, Application, Domain, Infrastructure)
+│  └─ README.md
+│
+├─ Eshop.Frontend/       # Frontend Angular (Presentation Tier)
+│  └─ README.md
+│
+├─ .gitignore
+└─ README.md             # Documento principale
+```
+
+Ogni modulo include un README dedicato che descrive:
+- il ruolo architetturale del componente
+- le tecnologie utilizzate
+- la struttura interna
+- le modalità di esecuzione in ambiente di sviluppo
 
 ---
 
 ## Tecnologie utilizzate
+
+Frontend:
 - Angular
 - TypeScript
 - HTML / CSS
 
----
-
-## Struttura del modulo
-
-```text
-Eshop.Frontend/
-├─ src/
-│  ├─ app/            # Componenti e logica dell’applicazione
-│  ├─ assets/         # Risorse statiche
-│  └─ environments/   # Configurazioni per ambiente
-├─ angular.json
-├─ package.json
-└─ README.md
-```
-
-La struttura segue le convenzioni standard Angular ed è mantenuta intenzionalmente semplice, poiché l’obiettivo del progetto non è la sperimentazione architetturale lato frontend.
+Backend:
+- .NET
+- ASP.NET Core (Web API)
+- Entity Framework Core
+- Database relazionale
 
 ---
 
-## Prerequisiti
+## Avvio del progetto
 
-Per l’esecuzione in ambiente di sviluppo sono richiesti:
-- Node.js
-- npm
-- Angular CLI
+Frontend e backend possono essere avviati **in modo indipendente**.
 
----
-
-## Avvio rapido (sviluppo)
-
-Per avviare il frontend localmente:
-
-1. Accedere alla cartella del modulo
-```bash
-cd Eshop.Frontend
-```
-
-2. Installare le dipendenze
-```bash
-npm install
-```
-
-3. Avviare il server di sviluppo
-```bash
-ng serve
-```
-
-L’applicazione sarà disponibile all’indirizzo:
-```
-http://localhost:4200/
-```
-
-Durante lo sviluppo, l’applicazione viene ricaricata automaticamente a ogni modifica del codice sorgente.
+Per le istruzioni dettagliate fare riferimento ai README dei singoli moduli:
+- `Eshop.Frontend/README.md`
+- `Eshop.Backend/README.md`
 
 ---
 
-## Integrazione con il backend
+## Scopo del progetto
 
-Il frontend comunica con il backend tramite **API REST** esposte dal modulo `Eshop.Server.Api`.
+Il progetto è stato sviluppato a scopo **didattico e sperimentale**, nell’ambito di un lavoro di **tesi universitaria** in area **sistemi distribuiti / reti di calcolatori**.
 
-Le chiamate API sono utilizzate per:
-- autenticazione e gestione degli utenti
-- consultazione dei prodotti
-- gestione del carrello
-- creazione e visualizzazione degli ordini
+L’attenzione è focalizzata su:
+- progettazione architetturale
+- separazione delle responsabilità
+- comunicazione tra componenti distribuiti
+- applicazione di buone pratiche di sviluppo software
 
-Il frontend non mantiene stato applicativo persistente lato client oltre a quanto necessario per la sessione utente.
+Il sistema non è concepito come prodotto commerciale, ma come **dimostrazione tecnica e progettuale**.
 
 ---
 
 ## Note
-Questo modulo è stato sviluppato a scopo **didattico e sperimentale**, nell’ambito di un progetto di tesi in Reti di Calcolatori.
+
+- Il repository non contiene file privati o dati sensibili
+- I file di configurazione specifici per ambiente sono esclusi tramite `.gitignore`
+- Ogni modulo è progettato per essere **autonomo e sostituibile**
