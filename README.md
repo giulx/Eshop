@@ -1,133 +1,99 @@
-# E-commerce Web Application  
-## Multi-Tier Architecture with DDD-Based Backend
+# Eshop Frontend
 
-## Overview
-Questo repository contiene un sistema **e-commerce web full-stack** sviluppato come **progetto di tesi in Reti di Calcolatori**.  
-Il lavoro affronta la progettazione e l’implementazione di un’architettura **multi-tier**, affiancata da una struttura **multi-layer** del backend ispirata ai principi del **Domain-Driven Design (DDD)**.
+Questo modulo implementa il **livello di presentazione (Presentation Tier)** del sistema e-commerce sviluppato come progetto di tesi.
 
-L’obiettivo è analizzare e dimostrare come la separazione dei livelli di un sistema distribuito e la corretta organizzazione della logica applicativa consentano di realizzare applicazioni web **modulari, scalabili e manutenibili**.
+Si tratta di una **single-page web application** realizzata con **Angular**, progettata per interagire esclusivamente con il backend tramite **API REST**, senza includere logica di business o accesso diretto ai dati.
 
----
-
-## System Architecture
-Il sistema è organizzato secondo una **architettura multi-tier**, in cui i livelli sono separati sia logicamente sia a livello di comunicazione:
-
-- **Presentation Tier**  
-  Web application sviluppata in **Angular (TypeScript)**, eseguita nel browser dell’utente e responsabile dell’interazione con il sistema.
-
-- **Application Tier**  
-  Backend sviluppato in **.NET (C#)** che espone **API REST** e gestisce la logica applicativa, fungendo da punto di comunicazione tra client e sistema informativo.
-
-- **Data Tier**  
-  Database **MySQL**, dedicato alla persistenza dei dati relativi a utenti, prodotti, carrelli e ordini.
-
-La separazione dei tier consente una comunicazione client-server basata su rete, coerente con i principi dei sistemi distribuiti.
+Il frontend è concepito come componente **indipendente e sostituibile**, in linea con i principi di un’architettura **multi-tier**.
 
 ---
 
-## Backend Architecture (DDD & Multi-Layer)
-All’interno dell’Application Tier, il backend è ulteriormente strutturato secondo un’architettura **multi-layer** ispirata al **Domain-Driven Design**, con una chiara separazione delle responsabilità:
+## Contesto architetturale
 
-### Domain
-Contiene il **modello di dominio**, includendo:
-- entità
-- regole di business fondamentali
-- logica core dell’applicazione  
+Nel sistema complessivo:
 
-Questo layer è indipendente da framework, database e tecnologie esterne.
+- il **frontend** gestisce l’interazione con l’utente e la presentazione dei dati
+- il **backend** espone le funzionalità applicative e la logica di dominio
+- la comunicazione avviene tramite richieste HTTP verso endpoint REST
 
-### Application
-Raccoglie i **servizi applicativi** e i **casi d’uso**, coordinando le operazioni tra il dominio e gli strati esterni.  
-Include DTO e logica applicativa, senza dipendenze dirette dall’infrastruttura.
-
-### API (Controllers)
-Espone le funzionalità del sistema tramite **API REST**.  
-Gestisce le richieste HTTP, l’autenticazione e l’autorizzazione, delegando l’elaborazione ai servizi applicativi.
-
-### Infrastructure
-Contiene le **implementazioni tecniche**, tra cui:
-- accesso al database MySQL
-- implementazione dei repository
-- servizi di supporto (autenticazione, pagamenti simulati)
-
-Questa suddivisione migliora manutenibilità, testabilità ed estendibilità del backend.
+Questa separazione consente l’evoluzione indipendente dei componenti e favorisce scalabilità e manutenibilità.
 
 ---
 
-## Modularity and Scalability
-La **modularità** del sistema è garantita dalla suddivisione del backend in layer distinti, che riduce l’accoppiamento tra i componenti e consente l’evoluzione indipendente delle parti applicative.
-
-La **scalabilità** è favorita da:
-- architettura **multi-tier**, che permette di scalare frontend, backend e database in modo indipendente
-- esposizione di API REST stateless
-- separazione tra logica di dominio e dettagli infrastrutturali
-
-Queste caratteristiche rendono il sistema adatto a scenari di crescita sia funzionale sia di carico.
-
----
-
-## Functionalities
-
-### User
-- Registrazione e autenticazione
-- Consultazione del catalogo prodotti
-- Gestione del carrello
-- Conferma degli ordini (pagamento simulato)
-- Visualizzazione dello storico degli ordini
-
-### Administrator
-- Gestione degli utenti
-- Gestione dei prodotti
-- Gestione degli ordini
-
-L’amministratore è implementato come **utente con privilegi estesi**, con accesso a funzionalità di gestione avanzate.
-
----
-
-## Technologies Used
-
-### Backend
-- .NET (C#)
-- RESTful APIs
-- MySQL
-
-### Frontend
+## Tecnologie utilizzate
 - Angular
 - TypeScript
 - HTML / CSS
 
-### Database
-- MySQL
-
 ---
 
-## Repository Structure
+## Struttura del modulo
 
 ```text
-my-project/
-├─ backend/
-│  ├─ Domain/           # Modello di dominio (DDD)
-│  ├─ Application/      # Servizi applicativi e casi d’uso
-│  ├─ API/              # Controller e API REST
-│  └─ Infrastructure/   # Persistenza e servizi tecnici
-├─ frontend/            # Frontend Angular
-├─ README.md
-└─ .gitignore
+Eshop.Frontend/
+├─ src/
+│  ├─ app/            # Componenti e logica dell’applicazione
+│  ├─ assets/         # Risorse statiche
+│  └─ environments/   # Configurazioni per ambiente
+├─ angular.json
+├─ package.json
+└─ README.md
 ```
 
----
-
-## Execution Model
-Il frontend e il backend sono progettati come componenti separati, comunicanti tramite HTTP, in linea con i principi dell’architettura client-server e dei sistemi distribuiti.
+La struttura segue le convenzioni standard Angular ed è mantenuta intenzionalmente semplice, poiché l’obiettivo del progetto non è la sperimentazione architetturale lato frontend.
 
 ---
 
-## Notes
-- Il sistema di pagamento è **simulato** e non utilizza servizi di pagamento reali.
-- Il progetto è stato sviluppato esclusivamente a scopo **didattico e accademico**, nell’ambito di un lavoro di tesi.
+## Prerequisiti
+
+Per l’esecuzione in ambiente di sviluppo sono richiesti:
+- Node.js
+- npm
+- Angular CLI
 
 ---
 
-## Author
-Progetto di tesi in Reti di Calcolatori  
-**Giulia Nuzzi**
+## Avvio rapido (sviluppo)
+
+Per avviare il frontend localmente:
+
+1. Accedere alla cartella del modulo
+```bash
+cd Eshop.Frontend
+```
+
+2. Installare le dipendenze
+```bash
+npm install
+```
+
+3. Avviare il server di sviluppo
+```bash
+ng serve
+```
+
+L’applicazione sarà disponibile all’indirizzo:
+```
+http://localhost:4200/
+```
+
+Durante lo sviluppo, l’applicazione viene ricaricata automaticamente a ogni modifica del codice sorgente.
+
+---
+
+## Integrazione con il backend
+
+Il frontend comunica con il backend tramite **API REST** esposte dal modulo `Eshop.Server.Api`.
+
+Le chiamate API sono utilizzate per:
+- autenticazione e gestione degli utenti
+- consultazione dei prodotti
+- gestione del carrello
+- creazione e visualizzazione degli ordini
+
+Il frontend non mantiene stato applicativo persistente lato client oltre a quanto necessario per la sessione utente.
+
+---
+
+## Note
+Questo modulo è stato sviluppato a scopo **didattico e sperimentale**, nell’ambito di un progetto di tesi in Reti di Calcolatori.

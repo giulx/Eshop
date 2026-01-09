@@ -1,59 +1,65 @@
-# EshopFrontend
+# Eshop Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.5.
+Questo modulo rappresenta il **livello di presentazione (Presentation Tier)** del sistema e-commerce sviluppato nell’ambito del progetto di tesi.
 
-## Development server
+Il frontend è una **web application Angular** che consente agli utenti di interagire con il backend tramite API REST, offrendo funzionalità di navigazione del catalogo, gestione del carrello e visualizzazione degli ordini.
 
-To start a local development server, run:
+Il frontend è progettato come componente **indipendente** rispetto al backend, in linea con i principi dell’architettura **multi-tier**.
 
+---
+
+## Ruolo nel sistema
+
+Il frontend si occupa esclusivamente di:
+- interazione con l’utente tramite browser
+- invio di richieste HTTP al backend
+- visualizzazione dei dati restituiti dalle API
+
+Non contiene logica di business, che è demandata interamente al backend.
+
+---
+
+## Tecnologie utilizzate
+- Angular
+- TypeScript
+- HTML / CSS
+
+---
+
+## Avvio dell’applicazione
+
+Per avviare il frontend in ambiente di sviluppo:
+
+1. Accedere alla cartella del frontend
+```bash
+cd Eshop.Frontend
+```
+
+2. Installare le dipendenze
+```bash
+npm install
+```
+
+3. Avviare il server di sviluppo
 ```bash
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+L’applicazione sarà disponibile all’indirizzo:
+```
+http://localhost:4200/
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Durante lo sviluppo, l’applicazione viene ricaricata automaticamente in seguito a modifiche del codice sorgente.
 
-```bash
-ng generate --help
-```
+---
 
-## Building
+## Comunicazione con il backend
 
-To build the project run:
+Il frontend comunica con il backend tramite **API REST** esposte dal modulo `Eshop.Server.Api`.  
+Gli endpoint vengono utilizzati per la gestione di utenti, prodotti, carrello e ordini.
 
-```bash
-ng build
-```
+---
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Note
+Questo modulo è stato sviluppato a scopo **didattico e sperimentale** nell’ambito di un progetto di tesi.
