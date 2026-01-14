@@ -13,7 +13,7 @@ import {
 export class ProductsApiService {
   private readonly http = inject(HttpClient);
 
-  private readonly baseUrl = 'http://localhost:5138/api/v1/product';
+  private readonly baseUrl = '/api/v1/Product';
 
   getAll(
     search: string | null,

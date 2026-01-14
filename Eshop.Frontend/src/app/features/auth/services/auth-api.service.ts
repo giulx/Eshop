@@ -11,8 +11,8 @@ export class AuthApiService {
 
   private readonly http = inject(HttpClient);
 
-  private readonly authBaseUrl = 'http://localhost:5138/api/Auth';
-  private readonly usersBaseUrl = 'http://localhost:5138/api/Users';
+  private readonly authBaseUrl = '/api/Auth';
+  private readonly usersBaseUrl = '/api/Users';
 
   login(body: LoginRequest): Observable<LoginResult> {
     return this.http.post<LoginResult>(`${this.authBaseUrl}/login`, body);

@@ -11,7 +11,7 @@ import { RemoveCartItemRequest } from '../models/remove-cart-item-request.model'
 export class CartApiService {
   private readonly http = inject(HttpClient);
 
-  private readonly baseUrl = 'http://localhost:5138/api/cart';
+  private readonly baseUrl = '/api/cart';
 
   // può restituire null se il carrello non esiste o viene svuotato
   getMyCart(): Observable<CartModel | null> {

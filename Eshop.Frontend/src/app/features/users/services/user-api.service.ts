@@ -12,7 +12,7 @@ export class UserApiService {
   private readonly http = inject(HttpClient);
 
   // UsersController: [Route("api/[controller]")] => /api/users
-  private readonly baseUrl = 'http://localhost:5138/api/users';
+  private readonly baseUrl = '/api/users';
 
   // =========================
   // PUBLIC / CUSTOMER

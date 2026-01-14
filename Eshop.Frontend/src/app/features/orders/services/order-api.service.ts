@@ -15,7 +15,7 @@ interface AdminOrderActionResponse {
 export class OrderApiService {
   private readonly http = inject(HttpClient);
 
-  private readonly baseUrl = 'http://localhost:5138/api/order';
+  private readonly baseUrl = '/api/order';
 
   // cliente – preview / conferma
   getPreview(): Observable<OrderPreviewModel> {

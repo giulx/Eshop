@@ -36,10 +36,21 @@ internal class Program
         // 1. DbContext / EF Core (MySQL)
         builder.Services.AddDbContext<AppDbContext>(options =>
         {
-            var connString = builder.Configuration.GetConnectionString("DefaultConnection")
-                             ?? "Server=localhost;Port=3306;Database=eshopdb;User=root;Password=5tr3g49ll4;";
-            options.UseMySql(connString, ServerVersion.AutoDetect(connString));
+            var connString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+            if (string.IsNullOrWhiteSpace(connString))
+                throw new InvalidOperationException("Connection string 'DefaultConnection' non trovata. Impostala in appsettings o via variabili d'ambiente (Docker Compose).");
+
+            // Fix pulita: niente AutoDetect (evita connessione immediata mentre MySQL sta ancora partendo)
+            var serverVersion = new MySqlServerVersion(new Version(8, 0, 0)); // MySQL 8.x
+
+            options.UseMySql(connString, serverVersion, mySqlOptions =>
+            {
+                mySqlOptions.EnableRetryOnFailure();
+            });
+
         });
+
 
         // 2. Repository (Infrastructure)
         builder.Services.AddScoped<IUserRepository, UserRepository>();
