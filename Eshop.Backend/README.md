@@ -1,25 +1,32 @@
 # Eshop Backend
 
-Questo modulo implementa l’**Application Tier** del sistema e-commerce sviluppato come progetto di tesi.  
+Questo modulo implementa il **Backend** del sistema e-commerce sviluppato come **progetto di tesi**.  
 Il backend è realizzato in **.NET (C#)** ed espone **API REST** consumate dal frontend Angular.
 
-Il backend è progettato secondo una struttura **multi-layer** ispirata al **Domain-Driven Design (DDD)**, con separazione netta tra dominio, casi d’uso applicativi, layer di esposizione (API) e infrastruttura (persistenza e servizi tecnici).
+L’intero backend è progettato per essere **eseguito esclusivamente tramite Docker**, insieme al database MySQL, così da garantire un ambiente riproducibile, coerente e facilmente avviabile senza configurazioni manuali locali.
+
+L’architettura segue una struttura **multi-layer** ispirata al **Domain-Driven Design (DDD)**, con una separazione netta tra dominio, casi d’uso applicativi, layer di esposizione (API) e infrastruttura (persistenza e servizi tecnici).
 
 ---
 
 ## Ruolo nel sistema (Multi-Tier)
-Nel sistema complessivo:
-- il **frontend** (Presentation Tier) gestisce UI e interazione utente
-- il **backend** (Application Tier) implementa logica applicativa ed espone endpoint REST
-- il **database MySQL** (Data Tier) garantisce la persistenza dei dati
 
-La comunicazione avviene tramite richieste HTTP tra frontend e backend; l’accesso ai dati è gestito esclusivamente dal backend.
+Nel sistema complessivo containerizzato:
+
+- il **frontend** (Presentation Tier) è un’applicazione Angular eseguita in un container dedicato
+- il **backend** (Application Tier) espone API REST ed è eseguito in un container .NET
+- il **database MySQL** (Data Tier) è eseguito in un container separato
+
+La comunicazione avviene tramite **rete Docker interna**:
+- il frontend comunica con il backend tramite API REST
+- il backend accede al database esclusivamente tramite MySQL
+- il database non è mai esposto direttamente al frontend
 
 ---
 
 ## Architettura backend (DDD & multi-layer)
 
-Il backend è suddiviso in quattro progetti principali:
+Il backend è suddiviso in quattro progetti principali.
 
 ### Eshop.Server.Domain
 Contiene il **modello di dominio** e la logica core:
@@ -27,109 +34,118 @@ Contiene il **modello di dominio** e la logica core:
 - value objects
 - eventi di dominio
 
-È il layer più stabile e indipendente da framework e dettagli tecnici.
+È il layer più stabile e completamente indipendente da framework, database o dettagli infrastrutturali.
 
 ### Eshop.Server.Application
-Contiene i **casi d’uso** e i servizi applicativi:
+Contiene i **casi d’uso applicativi**:
 - application services (orchestrazione delle operazioni)
 - DTO (contratti di input/output)
-- interfacce (astrazioni) verso repository e servizi tecnici
+- interfacce verso repository e servizi tecnici
 
-Non dipende dall’infrastruttura: definisce “cosa serve”, non “come è implementato”.
+Definisce **cosa fa il sistema**, senza conoscere **come è implementato** a livello tecnico.
 
 ### Eshop.Server.Infrastructure
 Contiene le **implementazioni tecniche**:
-- persistenza e repository (accesso dati)
-- integrazione con MySQL
-- servizi tecnici (es. autenticazione/JWT, pagamenti simulati)
-- migrations del database
+- persistenza e repository (Entity Framework Core + MySQL)
+- configurazione database e migrations
+- servizi tecnici (JWT, autenticazione, pagamenti simulati)
+
+Questo layer realizza concretamente le interfacce definite nell’Application Layer.
 
 ### Eshop.Server.Api
 Espone le funzionalità tramite **API REST**:
-- controllers e routing HTTP
-- gestione richieste/risposte
-- configurazione e dependency injection
-- mapping tra DTO e modelli
+- controller HTTP
+- routing e versioning delle API
+- configurazione dependency injection
+- configurazione CORS, JWT, Swagger
 
-È il **punto di ingresso** del backend (entry point) e il progetto che va avviato in esecuzione.
+È il **punto di ingresso del backend** ed è il progetto avviato all’interno del container Docker.
 
 ---
 
 ## Dipendenze tra i layer (regola di dipendenza)
-Schema consigliato (coerente con DDD / Clean Architecture):
+
+La struttura rispetta le regole di **Clean Architecture / DDD**:
 
 - `Eshop.Server.Application` → dipende da `Eshop.Server.Domain`
-- `Eshop.Server.Infrastructure` → dipende da `Eshop.Server.Application` (e, se necessario, da `Eshop.Server.Domain`)
+- `Eshop.Server.Infrastructure` → dipende da `Eshop.Server.Application` (e dal Domain se necessario)
 - `Eshop.Server.Api` → dipende da `Eshop.Server.Application` e `Eshop.Server.Infrastructure`
-- `Eshop.Server.Domain` → non dipende da altri layer
+- `Eshop.Server.Domain` → non dipende da nessun altro layer
 
-In questo modo il dominio resta isolato dai dettagli infrastrutturali.
+Il dominio rimane isolato dai dettagli infrastrutturali.
 
 ---
 
 ## Struttura del modulo
 
-```text
-Eshop.Backend/
-├─ Eshop.Server.Api/
-│  ├─ Controllers/
-│  ├─ Extensions/
-│  ├─ Mapping/
-│  └─ Properties/
-├─ Eshop.Server.Application/
-│  ├─ ApplicationServices/
-│  ├─ DTOs/
-│  │  ├─ Auth/
-│  │  ├─ Cart/
-│  │  ├─ Order/
-│  │  ├─ Product/
-│  │  └─ Utente/
-│  └─ Interfaces/
-├─ Eshop.Server.Domain/
-│  ├─ Entities/
-│  ├─ Events/
-│  └─ ValueObjects/
-└─ Eshop.Server.Infrastructure/
-   ├─ Auth/
-   ├─ Migrations/
-   ├─ Payments/
-   └─ Persistence/
+Eshop.Backend/  
+├─ Eshop.Server.Api/  
+│  ├─ Controllers/  
+│  ├─ Extensions/  
+│  ├─ Mapping/  
+│  └─ Properties/  
+├─ Eshop.Server.Application/  
+│  ├─ ApplicationServices/  
+│  ├─ DTOs/  
+│  │  ├─ Auth/  
+│  │  ├─ Cart/  
+│  │  ├─ Order/  
+│  │  ├─ Product/  
+│  │  └─ User/  
+│  └─ Interfaces/  
+├─ Eshop.Server.Domain/  
+│  ├─ Entities/  
+│  ├─ Events/  
+│  └─ ValueObjects/  
+└─ Eshop.Server.Infrastructure/  
+   ├─ Auth/  
+   ├─ Migrations/  
+   ├─ Payments/  
+   └─ Persistence/  
       └─ Repositories/
-```
 
-Nota: le cartelle `bin/` e `obj/` sono artefatti di build e non fanno parte del codice sorgente.
-
----
-
-## Avvio del backend (sviluppo)
-
-Il progetto da avviare è **Eshop.Server.Api**.
-
-### Avvio da terminale
-Dalla root del repository (o dalla root del backend), eseguire:
-
-```bash
-dotnet run --project Eshop.Backend/Eshop.Server.Api/Eshop.Server.Api.csproj
-```
-
-Il backend espone gli endpoint REST e può essere utilizzato dal frontend durante lo sviluppo.
-
-### Avvio da Visual Studio
-Aprire la solution e impostare `Eshop.Server.Api` come **Startup Project**, quindi avviare l’esecuzione.
+Le cartelle `bin/` e `obj/` non fanno parte del codice sorgente e sono generate durante la build Docker.
 
 ---
 
-## Database (MySQL) e migrations
+## Avvio del backend (Docker)
 
-Il sistema utilizza **MySQL** come livello di persistenza (Data Tier).  
-La struttura del database è versionata tramite **migrations** (presenti nel progetto `Eshop.Server.Infrastructure/Migrations`).
+Il backend **non è pensato per essere avviato manualmente** con `dotnet run`.  
+L’esecuzione avviene esclusivamente tramite **Docker Compose**, insieme a frontend e database.
 
-Questo significa che:
-- il database “fisico” non viene caricato su GitHub
-- lo schema è ricostruibile applicando le migrations (ambiente di sviluppo)
+Dalla root del repository:
+
+docker compose up --build
+
+Questo comando:
+- costruisce l’immagine Docker del backend
+- avvia il container API
+- collega il backend al container MySQL
+- applica automaticamente le migrations
+- esegue il seeding iniziale dei dati
+
+---
+
+## Database (MySQL, migrations e seeding)
+
+Il backend utilizza **MySQL** come Data Tier, eseguito in un container dedicato.
+
+Caratteristiche:
+- schema versionato tramite **Entity Framework Core migrations**
+- migrations applicate automaticamente all’avvio del container
+- **seeding automatico** di utenti, carrelli e prodotti demo
+- persistenza garantita tramite **volume Docker**
+
+Il database non contiene dati sensibili ed è ricostruibile integralmente.
 
 ---
 
 ## Note
-- Il pagamento è **simulato** e non utilizza provider reali.
-- Il progetto è stato sviluppato a scopo **didattico e accademico**, nell’ambito di una tesi in Reti di Calcolatori.
+
+- Il sistema di pagamento è **simulato** e non utilizza provider reali
+- Il progetto è sviluppato a scopo **didattico e accademico**
+- L’obiettivo è dimostrare:
+  - progettazione architetturale
+  - separazione delle responsabilità
+  - uso di DDD e Clean Architecture
+  - containerizzazione completa dell’intero stack
